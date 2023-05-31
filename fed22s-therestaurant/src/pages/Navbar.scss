@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* ---------------- Navbar and burger menu ------------------ */
+nav {
+  width: 100%;
+  height: 5em;
+  background-color: rgb(37, 39, 53);
+  display: flex;
+  justify-content: flex-start;
+  padding: 1em;
+}
+
+li {
+  a {
+    color: rgb(0, 183, 255);
+  }
+}
+
+.burger-menu {
+  height: 100%;
+  width: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.burger-bar {
+  width: 4em;
+  height: 0.5em;
+  background-color: rgb(0, 183, 255);
+  border-radius: 0.5em;
+}
+
+.menu {
+  width: 100%;
+  background-color: rgba(37, 39, 53, 0.97);
+  position: absolute;
+  top: 1;
+  z-index: 999;
+}
+
+/* ------------- sliding menu ------------------ */
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: inherit;
+  transition: ease 1;
+  animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+  0% {
+    height: 0%;
+
+    opacity: 0;
+  }
+
+  100% {
+    height: 26.5%;
+
+    opacity: 1;
+  }
+}
+
+/* ----- animations--------- */
+/* clicked */
+.burger-bar.clicked:nth-child(1) {
+  transform: rotate(45deg) translate(0.75em, 1.25em);
+  transition: ease-out 0.5s;
+}
+
+.burger-bar.clicked:nth-child(2) {
+  transform: scale(0.1);
+  transition: ease-out 0.5s;
+}
+
+.burger-bar.clicked:nth-child(3) {
+  transform: rotate(135deg) translate(-0.5em, 1em);
+  transition: ease-out 0.5s;
+}
+
+/* unclicked */
+.burger-bar.unclicked {
+  transform: rotate(0) translate(0);
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+}
+
+.bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: rotateBar ease-in-out 0.5s;
+}
+/* @keyframes rotateBar {
+  0% {
+    transform: rotate(-45deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+} */
+ul {
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+li {
+  padding: 10px;
+}
+a {
+  text-decoration: none;
+  color: rgb(12, 66, 87);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  a {
+    font-size: 24px;
+    font-weight: 700;
+    /* Add additional styles as per your requirement */
+  }
+  .burger-menu {
+    display: none;
+  }
+
+  /* Display the menu directly in the header */
+  .menu {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 2.5%;
+    justify-content: end;
+    background-color: rgb(37, 39, 53);
+  }
+
+  .menu ul {
+    list-style-type: none;
+    padding-inline-start: 0;
+    display: flex;
+  }
+
+  .menu li {
+    padding: 10px;
+    a {
+      color: rgb(0, 183, 255);
+    }
+  }
+
+  .menu a {
+    text-decoration: none;
+    color: rgb(12, 66, 87);
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
