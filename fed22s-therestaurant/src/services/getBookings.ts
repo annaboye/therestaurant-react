@@ -28,6 +28,7 @@ export const getBookings = async () => {
       "http://localhost:4000/api/v1/bookings"
     );
     const bookings = response.data;
+    console.log(bookings);
     return response.data;
   } catch {
     throw new Error("Could not get data from api");
