@@ -3,6 +3,7 @@ import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Booking } from "./pages/Booking";
 import { Contact } from "./pages/Contact";
+import { Admin } from "./pages/Admin";
 import { Error } from "./pages/Error";
 
 export const router = createBrowserRouter([
@@ -23,6 +24,11 @@ export const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact></Contact>,
+      },
+
+      {
+        path: "/admin",
+        element: <Admin></Admin>,
       },
     ],
   },
