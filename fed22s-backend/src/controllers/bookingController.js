@@ -18,8 +18,9 @@ exports.getAllBookings = async (req, res, next) => {
 
 
 
-exports.createBooking = async (req, res) => {
-    const date = req.body.date;
+exports.createBooking = async (req, res, next) => {
+  const date = req.body.date;
+  try {
     const time = req.body.time;
     const amountOfPersons = req.body.amountOfPersons;
     const description = req.body.description || " ";
@@ -41,11 +42,15 @@ exports.createBooking = async (req, res) => {
             `http://localhost:${process.env.PORT}/api/v1/bookings/${newBooking._id}`
         )
         .status(201)
-        .json(newBooking);
+      .json(newBooking);
+    } catch (error) {
+    next(error);
+  }
 
 };
 
-exports.deleteBooking = async (req, res) => {
+exports.deleteBooking = async (req, res, next) => {
+  try {
     const bookingId = req.params.bookingId;
     const bookingToDelete = await Booking.findById(bookingId);
     if (!bookingToDelete) throw new NotFoundError("Denna bokning finns inte!");
@@ -53,4 +58,7 @@ exports.deleteBooking = async (req, res) => {
     await bookingToDelete.delete();
 
     return res.sendStatus(204);
+       } catch (error) {
+    next(error);
+  }
 };
