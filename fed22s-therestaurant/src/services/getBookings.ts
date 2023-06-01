@@ -27,7 +27,7 @@ export const getBookings = async () => {
     const response = await get<IBooking[]>(
       "http://localhost:4000/api/v1/bookings"
     );
-    const bookingsFromApi = response.data;
+    const bookings = response.data;
     return response.data;
   } catch {
     throw new Error("Could not get data from api");
