@@ -24,10 +24,10 @@ const get = async <T>(url: string) => {
 
 export const getBookings = async () => {
   try {
-    const response = await get<IBooking>(
-      "https://localhost:4000/api/v1/bookings"
+    const response = await get<IBooking[]>(
+      "http://localhost:4000/api/v1/bookings"
     );
-
+    const bookingsFromApi = response.data;
     return response.data;
   } catch {
     throw new Error("Could not get data from api");
