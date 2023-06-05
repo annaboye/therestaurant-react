@@ -10,18 +10,14 @@ exports.getAllBookings = async (req, res, next) => {
         throw new NotFoundError("Finns inga bokningar tyvärr!");
       }
 
-      return res.json({
-        data: bookings,
-      });
+      return res.json(bookings);
     } else {
       const bookings = await Booking.find();
       if (!bookings) {
         throw new NotFoundError("Finns inga bokningar tyvärr!");
       }
 
-      return res.json(
-        bookings,
-      );
+      return res.json(bookings);
     }
   } catch (error) {
     next(error);
