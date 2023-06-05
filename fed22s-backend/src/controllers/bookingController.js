@@ -19,9 +19,9 @@ exports.getAllBookings = async (req, res, next) => {
         throw new NotFoundError("Finns inga bokningar tyvärr!");
       }
 
-      return res.json({
-        data: bookings,
-      });
+      return res.json(
+        bookings,
+      );
     }
   } catch (error) {
     next(error);
@@ -76,9 +76,7 @@ exports.getBookingById = async (req, res, next) => {
     const booking = await Booking.findById(bookingId);
     if (!booking) throw new NotFoundError("Denna bokning finns inte!");
 
- 
-
-    return res.json(booking)
+    return res.json(booking);
   } catch (error) {
     next(error);
   }
