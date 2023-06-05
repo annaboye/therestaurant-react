@@ -2,19 +2,14 @@ import axios from "../../node_modules/axios/index";
 
 interface IGuest {
   name: string;
-
   email: string;
-
   mobile: string;
 }
 
 interface IBooking {
   date: string;
-
   time: string;
-
   amountOfPersons: number;
-
   guest: IGuest;
 }
 
