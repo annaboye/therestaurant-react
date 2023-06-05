@@ -30,6 +30,7 @@ export const BookingForm = () => {
     dispatch({ type: ActionType.ADDED, payload: JSON.stringify(userInput) });
     setUserInput(defaultForm);
   };
+  console.log(bookings);
 
   const searchAvalibleTables = () => {
     setShowDate(false);
