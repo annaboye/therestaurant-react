@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
-export const OffBooking = () => {
+export const CancelBooking = () => {
   const [userInput, setUserInput] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
