@@ -5,6 +5,7 @@ import { Booking } from "./pages/Booking";
 import { Contact } from "./pages/Contact";
 import { Admin } from "./pages/Admin";
 import { Error } from "./pages/Error";
+import { BookingView } from "./pages/BookingView";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,8 @@ export const router = createBrowserRouter([
         path: "/admin",
         element: <Admin></Admin>,
       },
+
+      { path: "/booking/:id", element: <BookingView></BookingView> },
     ],
   },
 ]);
