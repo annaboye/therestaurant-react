@@ -92,7 +92,9 @@ export const BookingForm = () => {
                 onChange={(e) =>
                   setUserInput({ ...userInput, time: e.target.value })
                 }
+                required
               >
+                <option value=""></option>
                 <option value="18:00">18:00</option>
                 <option value="21:00">21:00</option>
               </select>

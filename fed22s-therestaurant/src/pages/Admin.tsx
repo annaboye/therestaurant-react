@@ -7,7 +7,7 @@ export const Admin = () => {
   return (
     <>
       <button onClick={getBookings}>Admin</button>
-      <button onClick={createBooking}>Create</button>
+      {/* <button onClick={createBooking}>Create</button> */}
 
       <div>
         {/*  {bookings.map((b) => (
