@@ -2,21 +2,31 @@ const Booking = require("../models/Booking");
 
 exports.getAllBookings = async (req, res, next) => {
   try {
-    const bookings = await Booking.find();
+    const date = req.query.date;
 
-    if (!bookings) {
-      throw new NotFoundError("Finns inga bokningar tyvärr!");
+    if (date) {
+      const bookings = await Booking.find({ date: date });
+      if (!bookings) {
+        throw new NotFoundError("Finns inga bokningar tyvärr!");
+      }
+
+      return res.json({
+        data: bookings,
+      });
+    } else {
+      const bookings = await Booking.find();
+      if (!bookings) {
+        throw new NotFoundError("Finns inga bokningar tyvärr!");
+      }
+
+      return res.json({
+        data: bookings,
+      });
     }
-
-    return res.json({
-      data: bookings,
-    });
   } catch (error) {
     next(error);
   }
 };
-
-
 
 exports.createBooking = async (req, res, next) => {
   const date = req.body.date;
@@ -26,27 +36,24 @@ exports.createBooking = async (req, res, next) => {
     const description = req.body.description || " ";
     const guest = req.body.guest;
 
-
-
     const newBooking = await Booking.create({
-        date: date,
-        time: time,
-        amountOfPersons: amountOfPersons,
-        description: description,
-        guest: guest
+      date: date,
+      time: time,
+      amountOfPersons: amountOfPersons,
+      description: description,
+      guest: guest,
     });
 
     return res
-        .setHeader(
-            "Location",
-            `http://localhost:${process.env.PORT}/api/v1/bookings/${newBooking._id}`
-        )
-        .status(201)
+      .setHeader(
+        "Location",
+        `http://localhost:${process.env.PORT}/api/v1/bookings/${newBooking._id}`
+      )
+      .status(201)
       .json(newBooking);
-    } catch (error) {
+  } catch (error) {
     next(error);
   }
-
 };
 
 exports.deleteBooking = async (req, res, next) => {
@@ -58,7 +65,7 @@ exports.deleteBooking = async (req, res, next) => {
     await bookingToDelete.delete();
 
     return res.sendStatus(204);
-       } catch (error) {
+  } catch (error) {
     next(error);
   }
 };
