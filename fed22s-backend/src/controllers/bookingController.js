@@ -69,3 +69,17 @@ exports.deleteBooking = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getBookingById = async (req, res, next) => {
+  try {
+    const bookingId = req.params.bookingId;
+    const booking = await Booking.findById(bookingId);
+    if (!booking) throw new NotFoundError("Denna bokning finns inte!");
+
+ 
+
+    return res.json(booking)
+  } catch (error) {
+    next(error);
+  }
+};
