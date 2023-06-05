@@ -18,24 +18,8 @@ interface IBooking {
   guest: IGuest;
 }
 
-export const createBooking = async () => {
+export const createBooking = async (booking: IBooking) => {
   try {
-    const booking = {
-      date: "21.10.2023",
-
-      time: "18:00",
-
-      amountOfPersons: 7,
-
-      guest: {
-        name: "Adam",
-
-        email: "fghjkl@fgh",
-
-        mobile: "456789",
-      },
-    };
-
     const response = await axios.post(
       "http://localhost:4000/api/v1/bookings",
       booking
@@ -46,5 +30,3 @@ export const createBooking = async () => {
     throw new Error("Could not create booking");
   }
 };
-
-createBooking();

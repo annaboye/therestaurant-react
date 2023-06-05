@@ -52,6 +52,11 @@ export const Navbar = () => {
                 Kontakt
               </Link>
             </li>
+            <li>
+              <Link to={"/admin"} onClick={closeMenu}>
+                Admin
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

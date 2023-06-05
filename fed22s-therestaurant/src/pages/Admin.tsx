@@ -3,6 +3,7 @@ import { BookingView } from "../components/BookingView";
 
 import { createBooking } from "../services/createBooking";
 export const Admin = () => {
+  const getBookings = () => {};
   return (
     <>
       <button onClick={getBookings}>Admin</button>
