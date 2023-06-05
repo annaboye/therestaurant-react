@@ -5,6 +5,7 @@ import {
 } from "../contexts/BookingContext";
 import "./ContactForm.scss";
 import { ActionType } from "../reducers/BookingsReducer";
+import { getBookings } from "../services/getBookings";
 
 const defaultForm = {
   date: "",
@@ -18,6 +19,8 @@ export const BookingForm = () => {
   const bookings = useContext(BookingContext);
   const dispatch = useContext(BookingDispatchContext);
 
+  console.log(bookings);
+
   const [userInput, setUserInput] = useState(defaultForm);
   const [showDate, setShowDate] = useState(true);
   const [showTime, setShowTime] = useState(false);
@@ -30,7 +33,6 @@ export const BookingForm = () => {
     dispatch({ type: ActionType.ADDED, payload: JSON.stringify(userInput) });
     setUserInput(defaultForm);
   };
-  console.log(bookings);
 
   const searchAvalibleTables = () => {
     setShowDate(false);
@@ -45,6 +47,10 @@ export const BookingForm = () => {
   const handleChangeOne = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     setUserInput({ ...userInput, [name]: e.target.value });
+    console.log(
+      "LOL",
+      bookings.map((book) => book.time)
+    );
   };
 
   const handleChangeTwo = (e: ChangeEvent<HTMLInputElement>) => {

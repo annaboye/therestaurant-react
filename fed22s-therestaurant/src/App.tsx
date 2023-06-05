@@ -5,11 +5,25 @@ import {
   BookingContext,
   BookingDispatchContext,
 } from "./contexts/BookingContext";
-import { useReducer } from "react";
-import { BookingsReducer } from "./reducers/BookingsReducer";
+import { useEffect, useReducer } from "react";
+import { ActionType, BookingsReducer } from "./reducers/BookingsReducer";
+import { getBookings } from "./services/getBookings";
 
 function App() {
   const [bookings, dispatch] = useReducer(BookingsReducer, []);
+
+  useEffect(() => {
+    async function fetchBookings() {
+      try {
+        const bookingData = await getBookings();
+        dispatch({ type: ActionType.GET_ALL, payload: bookingData });
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      }
+    }
+
+    fetchBookings();
+  }, []);
 
   return (
     <>
