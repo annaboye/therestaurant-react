@@ -1,0 +1,52 @@
+.footer-wrapper {
+  display: flex;
+
+  flex-direction: column;
+
+  background-color: rgb(37, 39, 53);
+  color: rgb(0, 183, 255);
+  min-height: 100px;
+  width: 100%;
+  padding: 2rem;
+}
+
+.footer-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  li {
+    font-size: small;
+    padding: 0;
+    color: white;
+  }
+}
+
+.icons-wrapper {
+  color: white;
+  padding: 2rem;
+
+  a {
+    color: rgb(0, 183, 255);
+    padding: 5px;
+    font-size: 2rem;
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.email-link {
+  color: white;
+  font-size: small;
+  &:visited {
+    color: white;
+  }
+}
+
+.footer-links {
+  a {
+    color: white;
+    font-size: small;
+    padding: 1rem;
+  }
+}
