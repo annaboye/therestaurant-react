@@ -3,7 +3,7 @@ import { createBooking } from "../services/createBooking";
 
 export interface IAction {
   type: ActionType;
-  payload: string;
+  payload: string | IBooking[];
 }
 
 export enum ActionType {
@@ -11,13 +11,21 @@ export enum ActionType {
   REMOVE,
   SEARCH,
   FILTER,
+  GET_ALL,
 }
 
-export const BookingsReducer = (bookings: IBooking[], action: IAction) => {
+export const BookingsReducer: React.Reducer<IBooking[], IAction> = (
+  bookings,
+  action
+) => {
   switch (action.type) {
     case ActionType.ADDED: {
-      createBooking(JSON.parse(action.payload));
-      return [...bookings, JSON.parse(action.payload)];
+      createBooking(JSON.parse(action.payload as string));
+      return [...bookings, JSON.parse(action.payload as string)];
+    }
+
+    case ActionType.GET_ALL: {
+      return action.payload as IBooking[];
     }
 
     default:
