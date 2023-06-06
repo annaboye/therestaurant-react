@@ -27,7 +27,7 @@ export const BookingView = ({ bookingId }: { bookingId: string }) => {
     <div>
       <h1>Bokningsdetaljer</h1>
       <p>ID: {booking._id}</p>
-      <p>Datum: {booking.date}</p>
+      <p>Datum: {new Date(booking.date).toLocaleDateString("sv-SE")}</p>
       <p>Tid: {booking.time}</p>
       <p>Antal personer: {booking.amountOfPersons}</p>
       <p>Namn: {booking.guest.name}</p>

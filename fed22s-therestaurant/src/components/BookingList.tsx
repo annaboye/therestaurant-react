@@ -25,7 +25,7 @@ export const BookingList = () => {
         {bookings.map((booking) => (
           <li key={booking._id}>
             <p>ID: {booking._id}</p>
-            <p>Datum: {booking.date}</p>
+            <p>Datum: {new Date(booking.date).toLocaleDateString("sv-SE")}</p>
             <p>Tid: {booking.time}</p>
             <p>Antal personer: {booking.amountOfPersons}</p>
             <p>Namn: {booking.guest.name}</p>
