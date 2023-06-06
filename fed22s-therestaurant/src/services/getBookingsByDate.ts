@@ -27,7 +27,11 @@ export const getBookingsByDate = async (date: string) => {
     const response = await get<IBooking[]>(
       `http://localhost:4000/api/v1/bookings?date=${date}`
     );
-    return response.data;
+    if (response) {
+      return response.data;
+    } else {
+      return [];
+    }
   } catch {
     throw new Error("Could not get data from api");
   }

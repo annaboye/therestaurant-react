@@ -10,28 +10,28 @@ import { ActionType, BookingsReducer } from "./reducers/BookingsReducer";
 import { getBookings } from "./services/getBookings";
 
 function App() {
-  const [bookings, dispatch] = useReducer(BookingsReducer, []);
+  // const [bookings, dispatch] = useReducer(BookingsReducer, []);
 
-  useEffect(() => {
-    async function fetchBookings() {
-      try {
-        const bookingData = await getBookings();
-        dispatch({ type: ActionType.GET_ALL, payload: bookingData });
-      } catch (error) {
-        console.error("Error fetching bookings:", error);
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchBookings() {
+  //     try {
+  //       const bookingData = await getBookings();
+  //       dispatch({ type: ActionType.GET_ALL, payload: bookingData });
+  //     } catch (error) {
+  //       console.error("Error fetching bookings:", error);
+  //     }
+  //   }
 
-    fetchBookings();
-  }, []);
+  //   fetchBookings();
+  // }, []);
 
   return (
     <>
-      <BookingContext.Provider value={bookings}>
-        <BookingDispatchContext.Provider value={dispatch}>
+      {/* <BookingContext.Provider value={bookings}>
+        <BookingDispatchContext.Provider value={dispatch}> */}
           <RouterProvider router={router}></RouterProvider>
-        </BookingDispatchContext.Provider>
-      </BookingContext.Provider>
+        {/* </BookingDispatchContext.Provider>
+      </BookingContext.Provider> */}
     </>
   );
 }

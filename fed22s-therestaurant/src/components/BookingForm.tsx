@@ -1,11 +1,8 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
-import {
-  BookingContext,
-  BookingDispatchContext,
-} from "../contexts/BookingContext";
 import "./ContactForm.scss";
-import { ActionType } from "../reducers/BookingsReducer";
 import { getBookings } from "../services/getBookings";
+import { getBookingsByDate } from "../services/getBookingsByDate";
+import { createBooking } from "../services/createBooking";
 
 const defaultForm = {
   date: "",
@@ -16,10 +13,7 @@ const defaultForm = {
 };
 
 export const BookingForm = () => {
-  const bookings = useContext(BookingContext);
-  const dispatch = useContext(BookingDispatchContext);
-
-  console.log(bookings);
+  
 
   const [userInput, setUserInput] = useState(defaultForm);
   const [showDate, setShowDate] = useState(true);
@@ -30,11 +24,15 @@ export const BookingForm = () => {
   const handleSubmitBooking = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     confirm("gdpr.....");
-    dispatch({ type: ActionType.ADDED, payload: JSON.stringify(userInput) });
+    const booking = JSON.stringify(userInput);
+    createBooking(JSON.parse(booking));
     setUserInput(defaultForm);
   };
 
-  const searchAvalibleTables = () => {
+  const searchAvalibleTables = async(e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    let thisDateBookings = await getBookingsByDate(userInput.date)
+    console.log(thisDateBookings)
     setShowDate(false);
     setShowTime(true);
   };
@@ -47,10 +45,7 @@ export const BookingForm = () => {
   const handleChangeOne = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     setUserInput({ ...userInput, [name]: e.target.value });
-    console.log(
-      "LOL",
-      bookings.map((book) => book.time)
-    );
+
   };
 
   const handleChangeTwo = (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +59,7 @@ export const BookingForm = () => {
   return (
     <div className="form-wrapper ">
       {showDate && (
-        <form onSubmit={searchAvalibleTables}>
+        <form onSubmit={(e)=>{searchAvalibleTables(e)}}>
           <div className="form-group">
             <label htmlFor="date"> Välj datum:</label>
             <input
