@@ -25,14 +25,16 @@ export const BookingView = ({ bookingId }: { bookingId: string }) => {
 
   return (
     <div>
-      <h1>Booking Details</h1>
-      <p>ID: {booking.id}</p>
-      <p>Date: {booking.date}</p>
-      <p>Time: {booking.time}</p>
-      <p>Amount of Persons: {booking.amountOfPersons}</p>
-      <p>Guest Name: {booking.guest.name}</p>
-      <p>Guest Email: {booking.guest.email}</p>
-      <p>Guest Mobile: {booking.guest.mobile}</p>
+      <h1>Bokningsdetaljer</h1>
+      <p>ID: {booking._id}</p>
+      <p>Datum: {booking.date}</p>
+      <p>Tid: {booking.time}</p>
+      <p>Antal personer: {booking.amountOfPersons}</p>
+      <p>Namn: {booking.guest.name}</p>
+      <p>Mail: {booking.guest.email}</p>
+      <p>Telefonnummer: {booking.guest.mobile}</p>
+      <p>Meddelande: {booking.description}</p>
+      <button>Ta bort bokning</button>
     </div>
   );
 };

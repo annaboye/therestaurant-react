@@ -5,7 +5,6 @@ import { Booking } from "./pages/Booking";
 import { Contact } from "./pages/Contact";
 import { Admin } from "./pages/Admin";
 import { Error } from "./pages/Error";
-import { BookingView } from "./components/BookingView";
 
 export const router = createBrowserRouter([
   {
