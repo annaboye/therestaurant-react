@@ -1,7 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { BookingView } from "../pages/BookingView";
 
-export const CancelBooking = () => {
+interface IBookingViewProps {
+  changeShowBooking(): void;
+}
+
+export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
   const [userInput, setUserInput] = useState("");
   const [showInput, setShowInput] = useState(true);
   const [showBooking, setShowBooking] = useState(false);
@@ -9,6 +13,7 @@ export const CancelBooking = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setShowBooking(true);
+    setShowInput(false);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +26,7 @@ export const CancelBooking = () => {
         {showInput && (
           <form onSubmit={handleSubmit}>
             <input type="text" onChange={handleChange} value={userInput} />
-            <button>Avboka</button>
+            <button onClick={() => changeShowBooking()}>Avboka</button>
           </form>
         )}{" "}
         {showBooking && <BookingView bookingId={userInput} />}
