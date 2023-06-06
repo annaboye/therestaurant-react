@@ -9,7 +9,7 @@ interface IGuest {
 }
 
 interface IBooking {
-  id?: string;
+  _id?: string;
 
   date: string;
 
@@ -26,8 +26,8 @@ export const createBooking = async (booking: IBooking) => {
       "http://localhost:4000/api/v1/bookings",
       booking
     );
-    const createdBookingId = response.data.id;
-    console.log(response.data);
+    const createdBookingId = response.data._id;
+    console.log(response.data._id);
     return createdBookingId;
   } catch {
     throw new Error("Could not create booking");
