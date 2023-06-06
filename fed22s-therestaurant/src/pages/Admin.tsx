@@ -1,5 +1,5 @@
 import { getBookings } from "../services/getBookings";
-import { BookingView } from "./BookingView";
+import { BookingView } from "../components/BookingView";
 
 import { createBooking } from "../services/createBooking";
 export const Admin = () => {

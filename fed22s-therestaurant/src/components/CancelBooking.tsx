@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { BookingView } from "../pages/BookingView";
+import { BookingView } from "./BookingView";
 
 interface IBookingViewProps {
   changeShowBooking(): void;
