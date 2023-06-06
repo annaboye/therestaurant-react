@@ -1,9 +1,19 @@
+import { Link } from "react-router-dom";
 import { Admin } from "./Admin";
+import "./Home.scss"
 
 export const Home = () => {
   return (
     <>
-      <h2>Startsida</h2>
+    
+    <div className="bg-wrapper">
+    <h1>The Restaurant</h1>
+
+      <Link to={"/booking"}>
+      <button className="big-btn">Boka bord</button>
+              </Link>
+      
+      </div>
     </>
   );
 };
