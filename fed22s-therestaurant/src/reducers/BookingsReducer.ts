@@ -21,7 +21,7 @@ export const BookingsReducer: React.Reducer<IBooking[], IAction> = (
   switch (action.type) {
     case ActionType.ADDED: {
       createBooking(JSON.parse(action.payload as string));
-      return [...bookings, JSON.parse(action.payload as string)];
+      /*  return [...bookings, JSON.parse(action.payload as string)]; */
     }
 
     case ActionType.GET_ALL: {
