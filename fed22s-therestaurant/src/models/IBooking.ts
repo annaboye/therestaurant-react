@@ -3,6 +3,7 @@ export interface IBooking {
   date: string;
   time: string;
   amountOfPersons: number;
+  description?: string;
   guest: IGuest;
 }
 
