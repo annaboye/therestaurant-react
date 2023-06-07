@@ -21,15 +21,27 @@ export const Admin = () => {
     setShowSecondChoice(true);
     setShowFirstChoice(false);
     setShowForm(false);
+    setShowSuccess(false);
   };
 
   const handleShowBookingList = () => {
     setShowBookingList(true);
+    setShowSecondChoice(false);
   };
 
   const handleChangeShowSuccess = () => {
     setShowSuccess(true);
     setShowForm(false);
+  };
+
+  const goBacktoSecondChoice = () => {
+    setShowSecondChoice(true);
+    setShowBookingList(false);
+  };
+
+  const goBackToFirstChoice = () => {
+    setShowFirstChoice(true);
+    setShowSecondChoice(false);
   };
 
   return (
@@ -48,6 +60,7 @@ export const Admin = () => {
               Hämta alla bokningar
             </button>
             <button>Välj datum</button>
+            <button onClick={goBackToFirstChoice}>Tillbacka</button>
           </>
         )}
 
@@ -57,7 +70,12 @@ export const Admin = () => {
           ></BookingForm>
         )}
 
-        {showBookingList && <BookingList></BookingList>}
+        {showBookingList && (
+          <>
+            <button onClick={goBacktoSecondChoice}>Tillbacka</button>
+            <BookingList></BookingList>
+          </>
+        )}
 
         {showSuccess && <div>Bokning genomförd</div>}
       </div>
