@@ -3,36 +3,62 @@ import "./ContactForm.scss";
 import { getBookings } from "../services/getBookings";
 import { getBookingsByDate } from "../services/getBookingsByDate";
 import { createBooking } from "../services/createBooking";
+import { ClipLoader } from "react-spinners";
+import "./BookingForm.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { Booking } from "../pages/Booking";
 
 const defaultForm = {
   date: "",
   time: "",
-  amountOfPersons: "",
+  amountOfPersons: 0,
   description: "",
   guest: { name: "", email: "", mobile: "" },
 };
 
 export const BookingForm = () => {
-  
-
   const [userInput, setUserInput] = useState(defaultForm);
   const [showDate, setShowDate] = useState(true);
   const [showTime, setShowTime] = useState(false);
   const [showPersonForm, setShowPersonForm] = useState(false);
   const [noTables, setNotables] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [bookingId, setBookingId] = useState("");
+  const [showBookingId, setShowBookingId] = useState(false);
 
-  const handleSubmitBooking = (e: FormEvent<HTMLFormElement>) => {
+  const showSpinner = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setShowBookingId(true);
+    }, 3000);
+  };
+
+  const handleSubmitBooking = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    showSpinner();
     confirm("gdpr.....");
+
+    try {
+      const createdBookingId = await createBooking(userInput);
+      setUserInput(defaultForm);
+      setShowPersonForm(false);
+      setBookingId(createdBookingId); // Assign the created booking ID to bookingId state
+    } catch (error) {
+      console.error(error);
+    }
+
     const booking = JSON.stringify(userInput);
     createBooking(JSON.parse(booking));
     setUserInput(defaultForm);
+    setShowPersonForm(false);
   };
 
-  const searchAvalibleTables = async(e: FormEvent<HTMLFormElement>) => {
+  const searchAvalibleTables = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let thisDateBookings = await getBookingsByDate(userInput.date)
-    console.log(thisDateBookings)
+    let thisDateBookings = await getBookingsByDate(userInput.date);
+    console.log(thisDateBookings);
     setShowDate(false);
     setShowTime(true);
   };
@@ -45,7 +71,6 @@ export const BookingForm = () => {
   const handleChangeOne = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     setUserInput({ ...userInput, [name]: e.target.value });
-
   };
 
   const handleChangeTwo = (e: ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +84,11 @@ export const BookingForm = () => {
   return (
     <div className="form-wrapper ">
       {showDate && (
-        <form onSubmit={(e)=>{searchAvalibleTables(e)}}>
+        <form
+          onSubmit={(e) => {
+            searchAvalibleTables(e);
+          }}
+        >
           <div className="form-group">
             <label htmlFor="date"> Välj datum:</label>
             <input
@@ -153,6 +182,28 @@ export const BookingForm = () => {
           <button> boka</button>
           <button> avbryt</button>
         </form>
+      )}
+      {loading && (
+        <div className="spinner-wrapper">
+          <ClipLoader
+            color={"rgb(0, 183, 255)"}
+            loading={loading}
+            size={40}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      )}
+
+      {showBookingId && (
+        <div className="booking-id-wrapper">
+          <h3>Här är ditt bokningsnummer: </h3>
+          <p>{bookingId._id}</p>
+
+          <div>
+            <FontAwesomeIcon className="check-icon" icon={faCircleCheck} />
+          </div>
+        </div>
       )}
     </div>
   );
