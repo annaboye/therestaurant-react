@@ -2,7 +2,7 @@ import { getBookings } from "../services/getBookings";
 import { BookingView } from "../components/BookingView";
 import { createBooking } from "../services/createBooking";
 import { BookingList } from "../components/BookingList";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { BookingForm } from "../components/BookingForm";
 
 export const Admin = () => {
@@ -11,6 +11,7 @@ export const Admin = () => {
   const [showSecondChoice, setShowSecondChoice] = useState(false);
   const [showBookingList, setShowBookingList] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [userInput, setUserInput] = useState("");
 
   const handleShowForm = () => {
     setShowForm(true);
@@ -44,6 +45,11 @@ export const Admin = () => {
     setShowSecondChoice(false);
   };
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUserInput(e.target.value);
+    console.log(e.target.value);
+  };
+
   return (
     <>
       <div>
@@ -56,10 +62,22 @@ export const Admin = () => {
 
         {showSecondChoice && (
           <>
+            <form>
+              <div>
+                <label htmlFor="date"> Välj datum:</label>
+                <input
+                  type="date"
+                  value={userInput}
+                  onChange={handleChange}
+                  name="date"
+                  required
+                />
+              </div>
+              <button>Hämta bokningar</button>
+            </form>
             <button onClick={handleShowBookingList}>
               Hämta alla bokningar
             </button>
-            <button>Välj datum</button>
             <button onClick={goBackToFirstChoice}>Tillbacka</button>
           </>
         )}
