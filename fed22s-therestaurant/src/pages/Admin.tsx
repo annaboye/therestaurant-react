@@ -14,6 +14,7 @@ export const Admin = () => {
 
   const handleShowForm = () => {
     setShowForm(true);
+    setShowSuccess(false);
   };
 
   const handleShowSecondChoice = () => {
@@ -28,6 +29,7 @@ export const Admin = () => {
 
   const handleChangeShowSuccess = () => {
     setShowSuccess(true);
+    setShowForm(false);
   };
 
   return (
@@ -57,7 +59,7 @@ export const Admin = () => {
 
         {showBookingList && <BookingList></BookingList>}
 
-        {showSuccess && <div>Tack för din bokning!</div>}
+        {showSuccess && <div>Bokning genomförd</div>}
       </div>
     </>
   );
