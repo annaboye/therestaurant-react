@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { IBooking } from "../models/IBooking";
 import { getBookings } from "../services/getBookings";
+import { BookingView } from "./BookingView";
 
 export const BookingList = () => {
   const [bookings, setBookings] = useState<IBooking[]>([]);
@@ -24,15 +25,7 @@ export const BookingList = () => {
       <ul>
         {bookings.map((booking) => (
           <li key={booking._id}>
-            <p>ID: {booking._id}</p>
-            <p>Datum: {new Date(booking.date).toLocaleDateString("sv-SE")}</p>
-            <p>Tid: {booking.time}</p>
-            <p>Antal personer: {booking.amountOfPersons}</p>
-            <p>Namn: {booking.guest.name}</p>
-            <p>Mail: {booking.guest.email}</p>
-            <p>Telefonnummer: {booking.guest.mobile}</p>
-            <p>Meddelande: {booking.description}</p>
-            <button>Ta bort bokning</button>
+            <BookingView booking={booking}></BookingView>
           </li>
         ))}
       </ul>
