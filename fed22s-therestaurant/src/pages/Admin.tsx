@@ -10,6 +10,7 @@ export const Admin = () => {
   const [showFirstChoice, setShowFirstChoice] = useState(true);
   const [showSecondChoice, setShowSecondChoice] = useState(false);
   const [showBookingList, setShowBookingList] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleShowForm = () => {
     setShowForm(true);
@@ -24,6 +25,11 @@ export const Admin = () => {
   const handleShowBookingList = () => {
     setShowBookingList(true);
   };
+
+  const handleChangeShowSuccess = () => {
+    setShowSuccess(true);
+  };
+
   return (
     <>
       <div>
@@ -43,9 +49,15 @@ export const Admin = () => {
           </>
         )}
 
-        {showForm && <BookingForm></BookingForm>}
+        {showForm && (
+          <BookingForm
+            changeShowSuccess={handleChangeShowSuccess}
+          ></BookingForm>
+        )}
 
         {showBookingList && <BookingList></BookingList>}
+
+        {showSuccess && <div>Tack för din bokning!</div>}
       </div>
     </>
   );
