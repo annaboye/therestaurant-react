@@ -37,7 +37,8 @@ export const BookingForm = () => {
     setShowTime(true);
   };
 
-  const chooseTime = () => {
+  const chooseTime = (e:FormEvent) => {
+    e.preventDefault();
     setShowTime(false);
     setShowPersonForm(true);
   };
@@ -65,6 +66,7 @@ export const BookingForm = () => {
             <input
               type="date"
               value={userInput.date}
+              min= {new Date().toISOString().split('T')[0]}
               onChange={handleChangeOne}
               name="date"
               required
@@ -77,8 +79,11 @@ export const BookingForm = () => {
               value={userInput.amountOfPersons}
               onChange={handleChangeOne}
               name="amountOfPersons"
+              max="12"
+              min="1"
               required
             />
+            <p>För större bokningar än 12, vänligen ring oss istället</p>
           </div>
           <button>sök lediga bord</button>
         </form>
