@@ -12,21 +12,31 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
   const [showInput, setShowInput] = useState(true);
   const [showBooking, setShowBooking] = useState(false);
   const [booking, setBooking] = useState<IBooking | undefined>();
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>, id: string) => {
-    e.preventDefault();
-    const fetchedBooking = await getBookingById(id);
-
-    setShowInput(false);
-    changeShowBooking();
-    if (fetchedBooking) {
-      setBooking(fetchedBooking);
-      setShowBooking(true);
-    }
-  };
+  const [showError, setShowError] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>, id: string) => {
+    e.preventDefault();
+
+    try {
+      const fetchedBooking = await getBookingById(id);
+
+      setShowInput(false);
+      changeShowBooking();
+      console.log(fetchedBooking);
+
+      if (fetchedBooking) {
+        setBooking(fetchedBooking);
+        setShowBooking(true);
+      }
+    } catch (error) {
+      console.error(error);
+      setShowError(true);
+      setUserInput("");
+    }
   };
 
   return (
@@ -39,6 +49,7 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
           </form>
         )}{" "}
         {showBooking && <BookingView booking={booking} />}
+        {showError && <div>Bokning hittades inte!</div>}
       </div>
     </>
   );
