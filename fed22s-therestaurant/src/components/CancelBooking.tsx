@@ -38,7 +38,9 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
       setUserInput("");
     }
   };
-
+  const handleDeleteBooking = () => {
+    setShowBooking(false);
+  };
   return (
     <>
       <div>

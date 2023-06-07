@@ -4,6 +4,10 @@ import { getBookings } from "../services/getBookings";
 import { getBookingsByDate } from "../services/getBookingsByDate";
 import { createBooking } from "../services/createBooking";
 
+interface IBookingFormProps {
+  changeShowSuccess(): void;
+}
+
 const defaultForm = {
   date: "",
   time: "",
@@ -12,9 +16,7 @@ const defaultForm = {
   guest: { name: "", email: "", mobile: "" },
 };
 
-export const BookingForm = () => {
-  
-
+export const BookingForm = ({ changeShowSuccess }: IBookingFormProps) => {
   const [userInput, setUserInput] = useState(defaultForm);
   const [showDate, setShowDate] = useState(true);
   const [showTime, setShowTime] = useState(false);
@@ -27,12 +29,13 @@ export const BookingForm = () => {
     const booking = JSON.stringify(userInput);
     createBooking(JSON.parse(booking));
     setUserInput(defaultForm);
+    changeShowSuccess();
   };
 
-  const searchAvalibleTables = async(e: FormEvent<HTMLFormElement>) => {
+  const searchAvalibleTables = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let thisDateBookings = await getBookingsByDate(userInput.date)
-    console.log(thisDateBookings)
+    let thisDateBookings = await getBookingsByDate(userInput.date);
+    console.log(thisDateBookings);
     setShowDate(false);
     setShowTime(true);
   };
@@ -45,7 +48,6 @@ export const BookingForm = () => {
   const handleChangeOne = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     setUserInput({ ...userInput, [name]: e.target.value });
-
   };
 
   const handleChangeTwo = (e: ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +61,11 @@ export const BookingForm = () => {
   return (
     <div className="form-wrapper ">
       {showDate && (
-        <form onSubmit={(e)=>{searchAvalibleTables(e)}}>
+        <form
+          onSubmit={(e) => {
+            searchAvalibleTables(e);
+          }}
+        >
           <div className="form-group">
             <label htmlFor="date"> Välj datum:</label>
             <input

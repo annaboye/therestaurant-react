@@ -9,17 +9,18 @@ interface IBookingProps {
 }
 
 export const BookingView = ({ booking }: IBookingProps) => {
+  const [isVisible, setIsVisible] = useState(true);
   const deleteThisBooking = (bookingId: string | undefined) => {
     deleteBooking(bookingId);
+    setIsVisible(!isVisible);
   };
 
   if (!booking) {
     return <div>Bokning hittades inte!</div>;
   } else {
     return (
-      <div>
-        <h1>Bokningsdetaljer</h1>
-        <p>ID: {booking._id}</p>
+      <div className={isVisible ? "visible" : "hidden"}>
+        <h3>ID: {booking._id}</h3>
         <p>Datum: {new Date(booking.date).toLocaleDateString("sv-SE")}</p>
         <p>Tid: {booking.time}</p>
         <p>Antal personer: {booking.amountOfPersons}</p>
