@@ -2,7 +2,7 @@ import { getBookings } from "../services/getBookings";
 import { BookingView } from "../components/BookingView";
 import { createBooking } from "../services/createBooking";
 import { BookingList } from "../components/BookingList";
-import { useState, ChangeEvent, useReducer, useEffect } from "react";
+import { useState, FormEvent, ChangeEvent, useReducer, useEffect } from "react";
 import { BookingForm } from "../components/BookingForm";
 import { ActionType, BookingsReducer } from "../reducers/BookingsReducer";
 import {
@@ -84,6 +84,12 @@ export const Admin = () => {
     console.log(e.target.value);
   };
 
+  /*   const searchBookingByDate = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch({ type: ActionType.FILTER, payload: userInput });
+    
+  };
+ */
   return (
     <>
       <BookingContext.Provider value={bookings}>
@@ -112,8 +118,12 @@ export const Admin = () => {
 
             {showSecondChoice && (
               <>
-                <form>
-                  <div>
+                <form
+                /*  onSubmit={(e) => {
+                    searchBookingByDate(e);
+                  }} */
+                >
+                  <div className="form-group">
                     <label htmlFor="date"> Välj datum:</label>
                     <input
                       type="date"
