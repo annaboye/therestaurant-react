@@ -18,7 +18,7 @@ export const BookingList = () => {
   };
 
   return (
-    <div>
+    <div className="form-wrapper">
       <h2>Bokningar</h2>
       <div className="form-group">
         <form onSubmit={handleSubmitDates}></form>
@@ -35,13 +35,15 @@ export const BookingList = () => {
       18:00
       <input type="radio" name="date" />
       21:00
-      <ul>
-        {bookings.map((booking) => (
-          <li key={booking._id}>
-            <BookingView booking={booking} key={booking._id}></BookingView>
-          </li>
-        ))}
-      </ul>
+      <div className="list-wrapper">
+        <ul>
+          {bookings.map((booking) => (
+            <li key={booking._id}>
+              <BookingView booking={booking} key={booking._id}></BookingView>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
