@@ -33,7 +33,7 @@ export const Admin = () => {
     }
 
     fetchBookings();
-  }, [bookings]);
+  }, []);
 
   const handleShowForm = () => {
     setShowForm(true);
