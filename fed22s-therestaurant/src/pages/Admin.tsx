@@ -10,6 +10,7 @@ import {
   BookingDispatchContext,
 } from "../contexts/BookingContext";
 import { ClipLoader } from "react-spinners";
+import "./Admin.scss";
 
 export const Admin = () => {
   const [bookings, dispatch] = useReducer(BookingsReducer, []);
@@ -65,7 +66,7 @@ export const Admin = () => {
   };
 
   const handleChangeShowSuccess = () => {
- return
+    return;
   };
 
   const goBacktoSecondChoice = () => {
@@ -87,7 +88,7 @@ export const Admin = () => {
     <>
       <BookingContext.Provider value={bookings}>
         <BookingDispatchContext.Provider value={dispatch}>
-          <div>
+          <div className="alt-wrapper">
             {showFirstChoice && (
               <>
                 <button onClick={handleShowSecondChoice}>
@@ -132,11 +133,8 @@ export const Admin = () => {
             )}
 
             {showForm && (
-              <BookingForm
-                changeShow={handleChangeShowSuccess}
-              ></BookingForm>
+              <BookingForm changeShow={handleChangeShowSuccess}></BookingForm>
             )}
-              
 
             {showBookingList && (
               <>
@@ -144,8 +142,6 @@ export const Admin = () => {
                 <BookingList></BookingList>
               </>
             )}
-
-            
           </div>
         </BookingDispatchContext.Provider>
       </BookingContext.Provider>
