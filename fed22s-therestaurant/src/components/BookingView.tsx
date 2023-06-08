@@ -3,23 +3,28 @@ import { useContext, useEffect, useState } from "react";
 
 import { getBookingById } from "../services/getBookingById";
 import { deleteBooking } from "../services/deleteBooking";
+import {
+  BookingContext,
+  BookingDispatchContext,
+} from "../contexts/BookingContext";
+import { ActionType } from "../reducers/BookingsReducer";
 
 interface IBookingProps {
   booking: IBooking | undefined;
 }
 
 export const BookingView = ({ booking }: IBookingProps) => {
-  const [isVisible, setIsVisible] = useState(true);
-  const deleteThisBooking = (bookingId: string | undefined) => {
+  const dispatch = useContext(BookingDispatchContext);
+  const deleteThisBooking = (bookingId: string) => {
     deleteBooking(bookingId);
-    setIsVisible(!isVisible);
+    dispatch({ type: ActionType.REMOVE, payload: bookingId.toString() });
   };
 
   if (!booking) {
     return <div>Bokning hittades inte!</div>;
   } else {
     return (
-      <div className={isVisible ? "visible" : "hidden"}>
+      <div>
         <h3>ID: {booking._id}</h3>
         <p>Datum: {new Date(booking.date).toLocaleDateString("sv-SE")}</p>
         <p>Tid: {booking.time}</p>
