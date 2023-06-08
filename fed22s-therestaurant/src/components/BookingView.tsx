@@ -1,7 +1,6 @@
 import { IBooking } from "../models/IBooking";
 import { useContext, useEffect, useState } from "react";
 
-import { getBookingById } from "../services/getBookingById";
 import { deleteBooking } from "../services/deleteBooking";
 import {
   BookingContext,
