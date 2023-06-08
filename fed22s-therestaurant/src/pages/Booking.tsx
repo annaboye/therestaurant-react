@@ -25,7 +25,7 @@ export const Booking = () => {
         {showForm && (
           <div>
             <h2>Bokning</h2>
-            <BookingForm changeShowSuccess={handleChangeShowSuccess} />
+            <BookingForm />
           </div>
         )}
 
