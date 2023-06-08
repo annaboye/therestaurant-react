@@ -9,6 +9,7 @@ import {
   BookingContext,
   BookingDispatchContext,
 } from "../contexts/BookingContext";
+import { ClipLoader } from "react-spinners";
 
 export const Admin = () => {
   const [bookings, dispatch] = useReducer(BookingsReducer, []);
@@ -18,6 +19,7 @@ export const Admin = () => {
   const [showBookingList, setShowBookingList] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [userInput, setUserInput] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchBookings() {
@@ -35,6 +37,15 @@ export const Admin = () => {
     fetchBookings();
   }, []);
 
+  const showSpinner = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      setShowBookingList(true);
+    }, 1000);
+  };
+
   const handleShowForm = () => {
     setShowForm(true);
     setShowSuccess(false);
@@ -48,8 +59,9 @@ export const Admin = () => {
   };
 
   const handleShowBookingList = () => {
-    setShowBookingList(true);
+    showSpinner();
     setShowSecondChoice(false);
+    /* setShowBookingList(false); */
   };
 
   const handleChangeShowSuccess = () => {
@@ -86,6 +98,18 @@ export const Admin = () => {
               </>
             )}
 
+            {loading && (
+              <div className="spinner-wrapper">
+                <ClipLoader
+                  color={"rgb(0, 183, 255)"}
+                  loading={loading}
+                  size={40}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            )}
+
             {showSecondChoice && (
               <>
                 <form>
@@ -104,7 +128,7 @@ export const Admin = () => {
                 <button onClick={handleShowBookingList}>
                   Hämta alla bokningar
                 </button>
-                <button onClick={goBackToFirstChoice}>Tillbacka</button>
+                <button onClick={goBackToFirstChoice}>Tillbaka</button>
               </>
             )}
 
@@ -116,7 +140,7 @@ export const Admin = () => {
 
             {showBookingList && (
               <>
-                <button onClick={goBacktoSecondChoice}>Tillbacka</button>
+                <button onClick={goBacktoSecondChoice}>Tillbaka</button>
                 <BookingList></BookingList>
               </>
             )}
