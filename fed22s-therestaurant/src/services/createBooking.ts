@@ -26,8 +26,8 @@ export const createBooking = async (booking: IBooking) => {
       "http://localhost:4000/api/v1/bookings",
       booking
     );
-    const createdBookingId = response.data._id;
-    console.log(response.data._id);
+    const createdBookingId = response.data;
+    console.log(response.data);
     return createdBookingId;
   } catch {
     throw new Error("Could not create booking");

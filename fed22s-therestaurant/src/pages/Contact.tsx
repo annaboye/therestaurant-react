@@ -1,4 +1,5 @@
 import { ContactForm } from "../components/ContactForm";
+import { Spinner } from "../components/Spinner";
 
 export const Contact = () => {
   return (
