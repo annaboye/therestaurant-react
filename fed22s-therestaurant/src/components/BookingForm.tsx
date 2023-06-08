@@ -41,18 +41,13 @@ export const BookingForm = () => {
     confirm("gdpr.....");
 
     try {
-      const createdBookingId = await createBooking(userInput);
+      const newBooking = await createBooking(userInput);
       setUserInput(defaultForm);
       setShowPersonForm(false);
-      setBookingId(createdBookingId); // Assign the created booking ID to bookingId state
+      setBookingId(newBooking._id); // Assign the created booking ID to bookingId state
     } catch (error) {
       console.error(error);
     }
-
-    const booking = JSON.stringify(userInput);
-    createBooking(JSON.parse(booking));
-    setUserInput(defaultForm);
-    setShowPersonForm(false);
   };
 
   const searchAvalibleTables = async (e: FormEvent<HTMLFormElement>) => {
@@ -198,7 +193,7 @@ export const BookingForm = () => {
       {showBookingId && (
         <div className="booking-id-wrapper">
           <h3>Här är ditt bokningsnummer: </h3>
-          <p>{bookingId._id}</p>
+          <p>{bookingId}</p>
 
           <div>
             <FontAwesomeIcon className="check-icon" icon={faCircleCheck} />
