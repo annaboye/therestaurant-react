@@ -65,8 +65,7 @@ export const Admin = () => {
   };
 
   const handleChangeShowSuccess = () => {
-    setShowSuccess(true);
-    setShowForm(false);
+ return
   };
 
   const goBacktoSecondChoice = () => {
@@ -134,9 +133,10 @@ export const Admin = () => {
 
             {showForm && (
               <BookingForm
-                changeShowSuccess={handleChangeShowSuccess}
+                changeShow={handleChangeShowSuccess}
               ></BookingForm>
             )}
+              
 
             {showBookingList && (
               <>
@@ -145,7 +145,7 @@ export const Admin = () => {
               </>
             )}
 
-            {showSuccess && <div>Bokning genomförd</div>}
+            
           </div>
         </BookingDispatchContext.Provider>
       </BookingContext.Provider>

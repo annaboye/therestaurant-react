@@ -11,7 +11,16 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
   const [userInput, setUserInput] = useState("");
   const [showInput, setShowInput] = useState(true);
   const [showBooking, setShowBooking] = useState(false);
-  const [booking, setBooking] = useState<IBooking | undefined>();
+  const [booking, setBooking] = useState<IBooking>({
+    guest: {
+      name: "",
+      email: "",
+      mobile: ""
+    },
+    date: "",
+    time: "",
+    amountOfPersons: 0
+  });
   const [showError, setShowError] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,18 +47,16 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
       setUserInput("");
     }
   };
-  const handleDeleteBooking = () => {
-    setShowBooking(false);
-  };
   return (
     <>
       <div>
-        {showInput && (
+        {showInput && (<div><h3>Hantera din bokning</h3>
+        <p>Skriv in ditt bokningsnummer här för avboka eller kolla tid och datum:</p>
           <form onSubmit={(e) => handleSubmit(e, userInput)}>
-            <input type="text" onChange={handleChange} value={userInput} />
-            <button>Avboka</button>
-          </form>
-        )}{" "}
+            <input placeholder="bokningsnummer.." type="text" onChange={handleChange} value={userInput} />
+            <button>Hantera bokning</button>
+          </form></div>
+        )}
         {showBooking && <BookingView booking={booking} />}
         {showError && <div>Bokning hittades inte!</div>}
       </div>

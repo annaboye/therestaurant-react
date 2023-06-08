@@ -26,7 +26,11 @@ avalibleTables: boolean
 
 }
 
-export const BookingForm = () => {
+interface IBookingFormProps{
+  changeShow: ()=>void
+}
+
+export const BookingForm = ({changeShow}: IBookingFormProps) => {
 const [userInput, setUserInput] = useState(defaultForm);
 const [bookingState, setBookingState] =useState<BookingState>({currentpage: 1, error:false, avalibleTables: true})
 const [show18Avalible, setShow18Avalible] = useState(false);
@@ -64,6 +68,7 @@ const [bookingId, setBookingId] = useState("");
 
 const searchAvalibleTables = async(e: FormEvent<HTMLFormElement>) => {
 e.preventDefault();
+changeShow();
 let thisDateBookings:IBooking[]= []
 try {
 thisDateBookings = await getBookingsByDate(userInput.date)
