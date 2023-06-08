@@ -9,6 +9,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { Booking } from "../pages/Booking";
 
+interface IBookingFormProps {
+  changeShowSuccess(): void;
+}
+
 const defaultForm = {
   date: "",
   time: "",
@@ -17,7 +21,9 @@ const defaultForm = {
   guest: { name: "", email: "", mobile: "" },
 };
 
-export const BookingForm = () => {
+
+export const BookingForm = ({ changeShowSuccess }: IBookingFormProps) => {
+
   const [userInput, setUserInput] = useState(defaultForm);
   const [showDate, setShowDate] = useState(true);
   const [showTime, setShowTime] = useState(false);
@@ -40,6 +46,7 @@ export const BookingForm = () => {
     showSpinner();
     confirm("gdpr.....");
 
+
     try {
       const newBooking = await createBooking(userInput);
       setUserInput(defaultForm);
@@ -48,6 +55,7 @@ export const BookingForm = () => {
     } catch (error) {
       console.error(error);
     }
+
   };
 
   const searchAvalibleTables = async (e: FormEvent<HTMLFormElement>) => {
@@ -58,7 +66,8 @@ export const BookingForm = () => {
     setShowTime(true);
   };
 
-  const chooseTime = () => {
+  const chooseTime = (e:FormEvent) => {
+    e.preventDefault();
     setShowTime(false);
     setShowPersonForm(true);
   };
@@ -89,6 +98,7 @@ export const BookingForm = () => {
             <input
               type="date"
               value={userInput.date}
+              min= {new Date().toISOString().split('T')[0]}
               onChange={handleChangeOne}
               name="date"
               required
@@ -101,8 +111,11 @@ export const BookingForm = () => {
               value={userInput.amountOfPersons}
               onChange={handleChangeOne}
               name="amountOfPersons"
+              max="12"
+              min="1"
               required
             />
+            <p>För större bokningar än 12, vänligen ring oss istället</p>
           </div>
           <button>sök lediga bord</button>
         </form>

@@ -34,5 +34,6 @@ export const getBookingsByDate = async (date: string) => {
     }
   } catch {
     throw new Error("Could not get data from api");
+   
   }
 };

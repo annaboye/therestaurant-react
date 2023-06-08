@@ -9,7 +9,6 @@ export interface IAction {
 export enum ActionType {
   ADDED,
   REMOVE,
-  SEARCH,
   FILTER,
   GET_ALL,
 }
@@ -20,12 +19,22 @@ export const BookingsReducer: React.Reducer<IBooking[], IAction> = (
 ) => {
   switch (action.type) {
     case ActionType.ADDED: {
-      createBooking(JSON.parse(action.payload as string));
-      /*  return [...bookings, JSON.parse(action.payload as string)]; */
+      return [...bookings, JSON.parse(action.payload as string)];
     }
 
     case ActionType.GET_ALL: {
-      return action.payload as IBooking[];
+      return JSON.parse(action.payload as string);
+    }
+
+    case ActionType.REMOVE: {
+      return bookings.filter(
+        (booking) => booking._id?.toString() !== action.payload
+      );
+    }
+
+    case ActionType.FILTER: {
+      const filterDate = action.payload;
+      return bookings.filter((booking) => booking.date === filterDate);
     }
 
     default:

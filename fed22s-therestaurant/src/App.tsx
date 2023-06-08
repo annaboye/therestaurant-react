@@ -10,8 +10,6 @@ import { ActionType, BookingsReducer } from "./reducers/BookingsReducer";
 import { getBookings } from "./services/getBookings";
 
 function App() {
-  // const [bookings, dispatch] = useReducer(BookingsReducer, []);
-
   // useEffect(() => {
   //   async function fetchBookings() {
   //     try {
@@ -29,8 +27,8 @@ function App() {
     <>
       {/* <BookingContext.Provider value={bookings}>
         <BookingDispatchContext.Provider value={dispatch}> */}
-          <RouterProvider router={router}></RouterProvider>
-        {/* </BookingDispatchContext.Provider>
+      <RouterProvider router={router}></RouterProvider>
+      {/* </BookingDispatchContext.Provider>
       </BookingContext.Provider> */}
     </>
   );
