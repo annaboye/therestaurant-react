@@ -11,6 +11,7 @@ import {
 } from "../contexts/BookingContext";
 import { ClipLoader } from "react-spinners";
 import "./Admin.scss";
+import { CancelBooking } from "../components/CancelBooking";
 
 export const Admin = () => {
   const [bookings, dispatch] = useReducer(BookingsReducer, []);
@@ -84,12 +85,6 @@ export const Admin = () => {
     console.log(e.target.value);
   };
 
-  /*   const searchBookingByDate = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch({ type: ActionType.FILTER, payload: userInput });
-    
-  };
- */
   return (
     <>
       <BookingContext.Provider value={bookings}>
@@ -118,32 +113,23 @@ export const Admin = () => {
 
             {showSecondChoice && (
               <>
-                <form
-                /*  onSubmit={(e) => {
-                    searchBookingByDate(e);
-                  }} */
-                >
-                  <div className="form-group">
-                    <label htmlFor="date"> Välj datum:</label>
-                    <input
-                      type="date"
-                      value={userInput}
-                      onChange={handleChange}
-                      name="date"
-                      required
-                    />
-                  </div>
-                  <button>Hämta bokningar</button>
-                </form>
                 <button onClick={handleShowBookingList}>
                   Hämta alla bokningar
                 </button>
+                <CancelBooking
+                  changeShowBooking={() => {
+                    return;
+                  }}
+                ></CancelBooking>
                 <button onClick={goBackToFirstChoice}>Tillbaka</button>
               </>
             )}
 
             {showForm && (
-              <BookingForm changeShow={handleChangeShowSuccess}></BookingForm>
+              <BookingForm
+                isAdmin={true}
+                changeShow={handleChangeShowSuccess}
+              ></BookingForm>
             )}
 
             {showBookingList && (

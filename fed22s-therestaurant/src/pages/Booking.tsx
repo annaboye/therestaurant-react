@@ -15,7 +15,6 @@ export const Booking = () => {
 
   const handleChangeShowCancel = () => {
     setShowCancel(false);
-   
   };
 
   return (
@@ -24,7 +23,7 @@ export const Booking = () => {
         {showForm && (
           <div>
             <h2>Bokning</h2>
-            <BookingForm changeShow={handleChangeShowCancel}/>
+            <BookingForm isAdmin={false} changeShow={handleChangeShowCancel} />
           </div>
         )}
 
@@ -33,11 +32,18 @@ export const Booking = () => {
             <Link to={"/"}>Tillbaka</Link>
           </p>
         )}
-
-
       </div>
-      
-      {showCancel &&<CancelBooking changeShowBooking={handleChangeShowBooking} />}
+
+      {showCancel && (
+        <div>
+          <h3>Hantera din bokning</h3>
+          <p>
+            Skriv in ditt bokningsnummer här för avboka eller kolla tid och
+            datum:
+          </p>
+          <CancelBooking changeShowBooking={handleChangeShowBooking} />
+        </div>
+      )}
     </>
   );
 };

@@ -25,9 +25,10 @@ interface BookingState {
 
 interface IBookingFormProps {
   changeShow: () => void;
+  isAdmin: boolean;
 }
 
-export const BookingForm = ({ changeShow }: IBookingFormProps) => {
+export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
   const [userInput, setUserInput] = useState(defaultForm);
   const [bookingState, setBookingState] = useState<BookingState>({
     currentpage: 1,
@@ -165,7 +166,9 @@ export const BookingForm = ({ changeShow }: IBookingFormProps) => {
               min="1"
               required
             />
-            <p>För större bokningar än 12, vänligen ring oss istället</p>
+            {!isAdmin && (
+              <p>För större bokningar än 12, vänligen ring oss istället</p>
+            )}
           </div>
           <button>sök lediga bord</button>
         </form>

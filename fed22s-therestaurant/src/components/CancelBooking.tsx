@@ -15,11 +15,11 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
     guest: {
       name: "",
       email: "",
-      mobile: ""
+      mobile: "",
     },
     date: "",
     time: "",
-    amountOfPersons: 0
+    amountOfPersons: 0,
   });
   const [showError, setShowError] = useState(false);
 
@@ -50,12 +50,19 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
   return (
     <>
       <div>
-        {showInput && (<div><h3>Hantera din bokning</h3>
-        <p>Skriv in ditt bokningsnummer här för avboka eller kolla tid och datum:</p>
-          <form onSubmit={(e) => handleSubmit(e, userInput)}>
-            <input placeholder="bokningsnummer.." type="text" onChange={handleChange} value={userInput} />
-            <button>Hantera bokning</button>
-          </form></div>
+        {showInput && (
+          <div>
+            <form onSubmit={(e) => handleSubmit(e, userInput)}>
+              <input
+                placeholder="bokningsnummer.."
+                type="text"
+                onChange={handleChange}
+                value={userInput}
+                required
+              />
+              <button>Hantera bokning</button>
+            </form>
+          </div>
         )}
         {showBooking && <BookingView booking={booking} />}
         {showError && <div>Bokning hittades inte!</div>}
