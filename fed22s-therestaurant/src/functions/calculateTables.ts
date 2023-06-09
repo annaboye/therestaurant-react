@@ -1,6 +1,6 @@
 import { IBooking } from "../models/IBooking";
 
-export const calculateTables = (bookings: IBooking[]): number => {
+export const calculateTables = (bookings: IBooking[], userInputPersons: number): boolean => {
   let bookedTables = 0;
   console.log(bookings);
   bookings.forEach((booking) => {
@@ -10,7 +10,13 @@ export const calculateTables = (bookings: IBooking[]): number => {
       bookedTables++;
     }
   });
+  if (userInputPersons<=6 && bookedTables<15){
+   return true;
+  }
+  if (userInputPersons>6 && bookedTables<14){
+    return true;
+   }
 
-  console.log(bookedTables);
-  return bookedTables;
+   return false;
+
 };

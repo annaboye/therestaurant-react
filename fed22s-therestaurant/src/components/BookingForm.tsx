@@ -55,10 +55,9 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
 
   const handleSubmitBooking = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    let confirmGdpr = confirm("gdpr.....");
+  if(confirmGdpr){
     showSpinner();
-    confirm("gdpr.....");
-
     try {
       const newBooking = await createBooking(userInput);
       setUserInput(defaultForm);
@@ -66,6 +65,8 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
     } catch (error) {
       console.error(error);
     }
+  }
+
   };
 
   const searchAvalibleTables = async (e: FormEvent<HTMLFormElement>) => {
@@ -75,34 +76,17 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
     try {
       thisDateBookings = await getBookingsByDate(userInput.date);
 
-      let bookings18 = thisDateBookings.filter(
-        (booking) => booking.time === "18:00"
-      );
-      let bookings21 = thisDateBookings.filter(
-        (booking) => booking.time === "21:00"
-      );
-      let tablesBooked18 = calculateTables(bookings18);
-      let tablesBooked21 = calculateTables(bookings21);
-      let tablesLeft = false;
-
-      if (tablesBooked18 < 15 && +userInput.amountOfPersons <= 6) {
-        setShow18Avalible(true);
-        tablesLeft = true;
+      let tablesLeft18 = calculateTables(thisDateBookings.filter((booking) => booking.time === "18:00" ), +userInput.amountOfPersons);
+      let tablesLeft21 = calculateTables(thisDateBookings.filter((booking) => booking.time === "21:00" ), +userInput.amountOfPersons);
+    
+      if(tablesLeft18){
+        setShow18Avalible(true)
       }
-      if (tablesBooked21 < 15 && +userInput.amountOfPersons <= 6) {
-        setShow21Avalible(true);
-        tablesLeft = true;
-      }
-      if (tablesBooked18 < 14 && +userInput.amountOfPersons > 6) {
-        setShow18Avalible(true);
-        tablesLeft = true;
-      }
-      if (tablesBooked21 < 14 && +userInput.amountOfPersons > 6) {
-        setShow21Avalible(true);
-        tablesLeft = true;
+      if(tablesLeft21){
+        setShow21Avalible(true)
       }
 
-      if (tablesLeft) {
+      if (tablesLeft18 || tablesLeft21) {
         setBookingState({
           ...bookingState,
           currentpage: 2,
@@ -114,8 +98,6 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
     } catch (error) {
       setBookingState({ ...bookingState, error: true });
     }
-
-    console.log(thisDateBookings);
   };
 
   const chooseTime = (e: FormEvent) => {
