@@ -19,8 +19,7 @@ export const Admin = () => {
   const [showFirstChoice, setShowFirstChoice] = useState(true);
   const [showSecondChoice, setShowSecondChoice] = useState(false);
   const [showBookingList, setShowBookingList] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [userInput, setUserInput] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -50,14 +49,14 @@ export const Admin = () => {
 
   const handleShowForm = () => {
     setShowForm(true);
-    setShowSuccess(false);
+    /*  setShowSuccess(false); */
   };
 
   const handleShowSecondChoice = () => {
     setShowSecondChoice(true);
     setShowFirstChoice(false);
     setShowForm(false);
-    setShowSuccess(false);
+    /*  setShowSuccess(false); */
   };
 
   const handleShowBookingList = () => {
@@ -78,11 +77,6 @@ export const Admin = () => {
   const goBackToFirstChoice = () => {
     setShowFirstChoice(true);
     setShowSecondChoice(false);
-  };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserInput(e.target.value);
-    console.log(e.target.value);
   };
 
   return (
