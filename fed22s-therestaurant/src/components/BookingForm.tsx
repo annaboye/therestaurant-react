@@ -56,17 +56,16 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
   const handleSubmitBooking = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let confirmGdpr = confirm("gdpr.....");
-  if(confirmGdpr){
-    showSpinner();
-    try {
-      const newBooking = await createBooking(userInput);
-      setUserInput(defaultForm);
-      setBookingId(newBooking._id); // Assign the created booking ID to bookingId state
-    } catch (error) {
-      console.error(error);
+    if (confirmGdpr) {
+      showSpinner();
+      try {
+        const newBooking = await createBooking(userInput);
+        setUserInput(defaultForm);
+        setBookingId(newBooking._id); // Assign the created booking ID to bookingId state
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }
-
   };
 
   const searchAvalibleTables = async (e: FormEvent<HTMLFormElement>) => {
@@ -76,14 +75,20 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
     try {
       thisDateBookings = await getBookingsByDate(userInput.date);
 
-      let tablesLeft18 = calculateTables(thisDateBookings.filter((booking) => booking.time === "18:00" ), +userInput.amountOfPersons);
-      let tablesLeft21 = calculateTables(thisDateBookings.filter((booking) => booking.time === "21:00" ), +userInput.amountOfPersons);
-    
-      if(tablesLeft18){
-        setShow18Avalible(true)
+      let tablesLeft18 = calculateTables(
+        thisDateBookings.filter((booking) => booking.time === "18:00"),
+        +userInput.amountOfPersons
+      );
+      let tablesLeft21 = calculateTables(
+        thisDateBookings.filter((booking) => booking.time === "21:00"),
+        +userInput.amountOfPersons
+      );
+
+      if (tablesLeft18) {
+        setShow18Avalible(true);
       }
-      if(tablesLeft21){
-        setShow21Avalible(true)
+      if (tablesLeft21) {
+        setShow21Avalible(true);
       }
 
       if (tablesLeft18 || tablesLeft21) {
@@ -115,6 +120,15 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
     setUserInput({
       ...userInput,
       guest: { ...userInput.guest, [name]: e.target.value },
+    });
+  };
+
+  const handleStopBooking = () => {
+    setBookingState({
+      ...bookingState,
+      currentpage: 1,
+      error: false,
+      avalibleTables: true,
     });
   };
 
@@ -189,45 +203,52 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
       )}
 
       {bookingState.currentpage === 3 && (
-        <form onSubmit={handleSubmitBooking}>
-          <div className="form-group">
-            <label htmlFor="name"> Namn:</label>
-            <input
-              type="text"
-              value={userInput.guest.name}
-              onChange={handleChangeTwo}
-              name="name"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email"> Mail:</label>
-            <input
-              type="email"
-              value={userInput.guest.email}
-              onChange={handleChangeTwo}
-              name="email"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="mobile"> Telefonnummer:</label>
-            <input
-              type="tel"
-              value={userInput.guest.mobile}
-              onChange={handleChangeTwo}
-              name="mobile"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Meddelande till oss</label>
-            <input type="text" name="description" onChange={handleChangeOne} />
-          </div>
-          <button> boka</button>
-          <button> avbryt</button>
-        </form>
+        <>
+          <form onSubmit={handleSubmitBooking}>
+            <div className="form-group">
+              <label htmlFor="name"> Namn:</label>
+              <input
+                type="text"
+                value={userInput.guest.name}
+                onChange={handleChangeTwo}
+                name="name"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email"> Mail:</label>
+              <input
+                type="email"
+                value={userInput.guest.email}
+                onChange={handleChangeTwo}
+                name="email"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="mobile"> Telefonnummer:</label>
+              <input
+                type="tel"
+                value={userInput.guest.mobile}
+                onChange={handleChangeTwo}
+                name="mobile"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Meddelande till oss</label>
+              <input
+                type="text"
+                name="description"
+                onChange={handleChangeOne}
+              />
+            </div>
+            <button> boka</button>
+          </form>
+          <button onClick={handleStopBooking}> avbryt</button>
+        </>
       )}
+
       {loading && (
         <div className="spinner-wrapper">
           <ClipLoader
