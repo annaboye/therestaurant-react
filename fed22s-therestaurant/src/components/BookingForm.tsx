@@ -130,6 +130,8 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
       error: false,
       avalibleTables: true,
     });
+
+    setUserInput(defaultForm);
   };
 
   return (
