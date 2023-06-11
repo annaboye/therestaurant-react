@@ -5,9 +5,10 @@ import { createBooking } from "../services/createBooking";
 import { ClipLoader } from "react-spinners";
 import "./BookingForm.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck, faSleigh } from "@fortawesome/free-solid-svg-icons";
 import { calculateTables } from "../functions/calculateTables";
 import { IBooking } from "../models/IBooking";
+import CookieConsent from "react-cookie-consent";
 
 const defaultForm = {
   date: "",
@@ -39,6 +40,8 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
   const [show21Avalible, setShow21Avalible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [bookingId, setBookingId] = useState("");
+  const [consentGiven, setConsentGiven] = useState(false);
+  const [showConsent, setShowConsent] = useState(false);
 
   const showSpinner = () => {
     setLoading(true);
@@ -53,19 +56,9 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
     }, 3000);
   };
 
-  const handleSubmitBooking = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmitBooking = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let confirmGdpr = confirm("gdpr.....");
-    if (confirmGdpr) {
-      showSpinner();
-      try {
-        const newBooking = await createBooking(userInput);
-        setUserInput(defaultForm);
-        setBookingId(newBooking._id); // Assign the created booking ID to bookingId state
-      } catch (error) {
-        console.error(error);
-      }
-    }
+    setShowConsent(true);
   };
 
   const searchAvalibleTables = async (e: FormEvent<HTMLFormElement>) => {
@@ -134,8 +127,39 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
     setUserInput(defaultForm);
   };
 
+  const handleAccept = async () => {
+    showSpinner();
+    try {
+      const newBooking = await createBooking(userInput);
+      setUserInput(defaultForm);
+      setBookingId(newBooking._id); // Assign the created booking ID to bookingId state
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="form-wrapper ">
+      {showConsent && (
+        <CookieConsent
+          overlay
+          debug={true}
+          location="top"
+          buttonText="Acceptera"
+          onAccept={handleAccept}
+          buttonStyle={{
+            padding: "0.5rem 1.5rem",
+            background: "#007bff",
+            color: "#fff",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+          }}
+        >
+          Denna webbplats använder cookies för att förbättra din upplevelse.
+        </CookieConsent>
+      )}
+
       {bookingState.currentpage === 1 && (
         <form
           onSubmit={(e) => {
