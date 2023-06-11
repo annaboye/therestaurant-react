@@ -36,7 +36,7 @@ export const ContactForm = () => {
         </div>
         <div className="form-group">
           <label htmlFor="email">Email</label>
-          <input type="text" onChange={handleChangeEmail} value={userInput2} />
+          <input type="email" onChange={handleChangeEmail} value={userInput2} />
         </div>
         <div className="form-group">
           <label htmlFor="message">Message</label>
