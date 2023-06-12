@@ -40,7 +40,6 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
   const [show21Avalible, setShow21Avalible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [bookingId, setBookingId] = useState("");
-  const [consentGiven, setConsentGiven] = useState(false);
   const [showConsent, setShowConsent] = useState(false);
 
   const showSpinner = () => {
@@ -156,7 +155,8 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
             cursor: "pointer",
           }}
         >
-          Denna webbplats använder cookies för att förbättra din upplevelse.
+          Jag intygar att jag har tagit del av informationen om behandlingen av
+          mina personuppgifter.
         </CookieConsent>
       )}
 
@@ -224,7 +224,7 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
               </select>
             </label>
           </div>
-          <button>Välj tid</button>
+          <button>Gå vidare</button>
         </form>
       )}
 
