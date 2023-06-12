@@ -40,7 +40,6 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
   const [show21Avalible, setShow21Avalible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [bookingId, setBookingId] = useState("");
-  const [consentGiven, setConsentGiven] = useState(false);
   const [showConsent, setShowConsent] = useState(false);
 
   const showSpinner = () => {
