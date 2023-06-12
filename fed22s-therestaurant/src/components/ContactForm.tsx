@@ -5,6 +5,7 @@ import CookieConsent from "react-cookie-consent";
 export const ContactForm = () => {
   const [userInput1, setUserInput1] = useState("");
   const [userInput2, setUserInput2] = useState("");
+  const [userInput3, setUserInput3] = useState("");
   const [showConsent, setShowConsent] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
@@ -19,9 +20,14 @@ export const ContactForm = () => {
     setUserInput2(e.target.value);
   };
 
+  const handleChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setUserInput3(e.target.value);
+  };
+
   const handleAccept = () => {
     setUserInput1("");
     setUserInput2("");
+    setUserInput3("");
   };
 
   return (
@@ -57,15 +63,34 @@ export const ContactForm = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
-          <input type="text" onChange={handleChangeName} value={userInput1} />
+          <input
+            type="text"
+            name="name"
+            onChange={handleChangeName}
+            value={userInput1}
+            required
+          />
         </div>
         <div className="form-group">
           <label htmlFor="email">Email</label>
-          <input type="email" onChange={handleChangeEmail} value={userInput2} />
+          <input
+            type="email"
+            onChange={handleChangeEmail}
+            value={userInput2}
+            name="email"
+            required
+          />
         </div>
         <div className="form-group">
           <label htmlFor="message">Message</label>
-          <textarea rows={5} cols={30}></textarea>
+          <textarea
+            rows={5}
+            cols={30}
+            value={userInput3}
+            onChange={handleChangeMessage}
+            name="message"
+            required
+          ></textarea>
         </div>
 
         <button>Skicka</button>
