@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BookingForm } from "../components/BookingForm";
 import { CancelBooking } from "../components/CancelBooking";
 import { Link } from "react-router-dom";
+import "./Booking.scss";
 
 export const Booking = () => {
   const [showForm, setShowForm] = useState(true);
@@ -35,7 +36,7 @@ export const Booking = () => {
       </div>
 
       {showCancel && (
-        <div>
+        <div className="cancel-wrapper">
           <h3>Hantera din bokning</h3>
           <p>
             Skriv in ditt bokningsnummer här för avboka eller kolla tid och
