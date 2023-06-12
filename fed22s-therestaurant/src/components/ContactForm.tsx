@@ -1,14 +1,15 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import "./ContactForm.scss";
+import CookieConsent from "react-cookie-consent";
 
 export const ContactForm = () => {
   const [userInput1, setUserInput1] = useState("");
   const [userInput2, setUserInput2] = useState("");
+  const [showConsent, setShowConsent] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setUserInput1("");
-    setUserInput2("");
+    setShowConsent(true);
   };
 
   const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,8 +19,32 @@ export const ContactForm = () => {
     setUserInput2(e.target.value);
   };
 
+  const handleAccept = () => {
+    setUserInput1("");
+    setUserInput2("");
+  };
+
   return (
     <div className="form-wrapper">
+      {showConsent && (
+        <CookieConsent
+          overlay
+          debug={true}
+          location="top"
+          buttonText="Acceptera"
+          onAccept={handleAccept}
+          buttonStyle={{
+            padding: "0.5rem 1.5rem",
+            background: "#007bff",
+            color: "#fff",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+          }}
+        >
+          Denna webbplats använder cookies för att förbättra din upplevelse.
+        </CookieConsent>
+      )}
       <div className="form-description">
         <h3>Företag / Event</h3>
         <p>
