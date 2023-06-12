@@ -2,10 +2,9 @@ import { IBooking } from "../models/IBooking";
 import { useContext, useEffect, useState } from "react";
 
 import { deleteBooking } from "../services/deleteBooking";
-import {
-  BookingDispatchContext,
-} from "../contexts/BookingContext";
+import { BookingDispatchContext } from "../contexts/BookingContext";
 import { ActionType } from "../reducers/BookingsReducer";
+import "./Bookingview.scss";
 
 interface IBookingProps {
   booking: IBooking;
@@ -13,18 +12,17 @@ interface IBookingProps {
 
 export const BookingView = ({ booking }: IBookingProps) => {
   const dispatch = useContext(BookingDispatchContext);
-  const [deleted, setDeleted] = useState(false)
+  const [deleted, setDeleted] = useState(false);
   const deleteThisBooking = (bookingId: string) => {
     deleteBooking(bookingId);
     dispatch({ type: ActionType.REMOVE, payload: bookingId as string });
-    setDeleted(true)
-    
+    setDeleted(true);
   };
 
   if (deleted) {
     return <div>Bokning raderades!</div>;
-  } 
-  if(booking) {
+  }
+  if (booking) {
     return (
       <div>
         <h3>ID: {booking._id}</h3>
@@ -36,17 +34,16 @@ export const BookingView = ({ booking }: IBookingProps) => {
         <p>Telefonnummer: {booking.guest.mobile}</p>
         <p>Meddelande: {booking.description}</p>
         <button
+          className="delete-button"
           onClick={() => {
-            if(booking && booking._id)
-              deleteThisBooking(booking._id);
+            if (booking && booking._id) deleteThisBooking(booking._id);
           }}
         >
           Ta bort bokning
         </button>
       </div>
     );
-  }
-  else {
+  } else {
     return <div>Bokning hittades inte!</div>;
   }
 };

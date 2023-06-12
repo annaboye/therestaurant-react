@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { BookingView } from "./BookingView";
 import { getBookingById } from "../services/getBookingById";
 import { IBooking } from "../models/IBooking";
+import "./CancelBooking.scss";
 
 interface IBookingViewProps {
   changeShowBooking(): void;
@@ -51,7 +52,7 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
     <>
       <div>
         {showInput && (
-          <div>
+          <div className="form-group">
             <form onSubmit={(e) => handleSubmit(e, userInput)}>
               <input
                 placeholder="bokningsnummer.."
