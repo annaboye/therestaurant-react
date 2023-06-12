@@ -224,7 +224,7 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
               </select>
             </label>
           </div>
-          <button>Välj tid</button>
+          <button>Gå vidare</button>
         </form>
       )}
 
