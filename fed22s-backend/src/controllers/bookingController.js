@@ -1,4 +1,6 @@
 const Booking = require("../models/Booking");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 exports.getAllBookings = async (req, res, next) => {
   try {
@@ -40,6 +42,37 @@ exports.createBooking = async (req, res, next) => {
       guest: guest,
     });
 
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.MAIL,
+        pass: process.env.PASSWORD,
+      },
+    });
+
+    const mailText = `
+    Datum: ${newBooking.date}\
+    Tid: ${newBooking.time}\
+    Antal Personer: ${newBooking.amountOfPersons}\
+    Bokningsnummer: ${newBooking._id.toString()}\
+    Välkommen!
+     `;
+
+    let mailOptions = {
+      from: "The restaurant",
+      to: guest.email,
+      subject: "Tack för din bokning",
+      text: "Här kommer ditt bokningsnummer: ", // plain text body
+      html: mailText,
+    };
+    console.log(guest.email);
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
     return res
       .setHeader(
         "Location",

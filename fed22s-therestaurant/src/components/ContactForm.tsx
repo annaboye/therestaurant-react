@@ -22,7 +22,7 @@ export const ContactForm = () => {
     setUserInput1("");
     setUserInput2("");
     setShowForm(false);
-    showSpinner();
+    
      setShowConsent(true);
   };
   const showSpinner = () => {
@@ -31,7 +31,7 @@ export const ContactForm = () => {
     setTimeout(() => {
       setLoading(false);
       setShowThanks(true);
-    }, 1000);
+    }, 1000);}
 
   const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput1(e.target.value);
@@ -48,12 +48,12 @@ export const ContactForm = () => {
     setUserInput1("");
     setUserInput2("");
     setUserInput3("");
+    showSpinner();
   };
 
   return (
-
     <>
-          <div className="form-wrapper">
+      <div className="form-wrapper">
       {showConsent && (
         <CookieConsent
           overlay
@@ -74,55 +74,14 @@ export const ContactForm = () => {
           mina personuppgifter.
         </CookieConsent>
       )}
-      <div className="form-description">
-        <h3>Företag / Event</h3>
-        <p>
-          För större ordrar hänvisar vi hit för att på bästa sätt kunna
-          skräddarsy en lösning efter behov. Skriv gärna till oss om ni har
-          funderingar eller frågor, så ska vi snabbt göra vårt bästa för att
-          hjälpa till.
-        </p>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            onChange={handleChangeName}
-            value={userInput1}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            onChange={handleChangeEmail}
-            value={userInput2}
-            name="email"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="message">Message</label>
-          <textarea
-            rows={5}
-            cols={30}
-            value={userInput3}
-            onChange={handleChangeMessage}
-            name="message"
-            required
-          ></textarea>
+     
+    
 
-        </div>
-      )}
 
       {showThanks && (
         <div className="thanks-wrapper">
           <div>
             <h3>Tack för ditt mail. Vi återkommer så fort vi kan.</h3>
-
             <FontAwesomeIcon className="check-icon" icon={faCircleCheck} />
           </div>
           <div>
@@ -164,7 +123,7 @@ export const ContactForm = () => {
             </div>
             <div className="form-group">
               <label htmlFor="message">Message</label>
-              <textarea rows={5} cols={30}></textarea>
+              <textarea rows={5} cols={30} onChange={handleChangeMessage}></textarea>
             </div>
 
             <button>Skicka</button>
@@ -181,8 +140,10 @@ export const ContactForm = () => {
             aria-label="Loading Spinner"
             data-testid="loader"
           />
+          </div>)}
+          </div>
+               
 
-
-    </>
-  );
+    </>)
+  ;
 };
