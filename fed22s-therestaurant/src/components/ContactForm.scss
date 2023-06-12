@@ -44,5 +44,15 @@ button:disabled {
 }
 
 .form-description {
-  padding: 2rem;
+  padding: 1rem;
+}
+
+.thanks-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 300px;
+  h3 {
+    padding: 2rem;
+  }
 }

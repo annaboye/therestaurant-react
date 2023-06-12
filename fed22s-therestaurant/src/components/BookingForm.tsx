@@ -131,7 +131,7 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
     try {
       const newBooking = await createBooking(userInput);
       setUserInput(defaultForm);
-      setBookingId(newBooking._id); // Assign the created booking ID to bookingId state
+      setBookingId(newBooking._id);
     } catch (error) {
       console.error(error);
     }
