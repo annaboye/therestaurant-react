@@ -155,7 +155,8 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
             cursor: "pointer",
           }}
         >
-          Denna webbplats använder cookies för att förbättra din upplevelse.
+          Jag intygar att jag har tagit del av informationen om behandlingen av
+          mina personuppgifter.
         </CookieConsent>
       )}
 
