@@ -9,8 +9,21 @@ nav {
   height: 5em;
   background-color: rgb(37, 39, 53);
   display: flex;
-  justify-content: flex-start;
+
+  align-items: center;
   padding: 1em;
+}
+.loggo-mobile {
+  background-image: url("../assets//loggo2.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 200px;
+  height: 50px;
+  margin: 0 auto;
+}
+.adjuster {
+  width: 64px;
 }
 
 li {
@@ -120,6 +133,8 @@ a {
   font-size: 20px;
   font-weight: 600;
 }
+.burger-wrapper {
+}
 
 @media (min-width: 768px) {
   a {
@@ -137,8 +152,9 @@ a {
     align-items: center;
     position: absolute;
     top: 2.5%;
-    justify-content: end;
+    justify-content: center;
     background-color: rgb(37, 39, 53);
+    width: 100%;
   }
 
   .menu ul {
@@ -149,6 +165,7 @@ a {
 
   .menu li {
     padding: 10px;
+
     a {
       color: #00b7ff;
     }
@@ -159,5 +176,25 @@ a {
     color: rgb(12, 66, 87);
     font-size: 20px;
     font-weight: 600;
+  }
+  .bar-wrapper {
+    width: 100%;
+    display: flex;
+
+    justify-content: space-between;
+  }
+  .loggo {
+    position: relative;
+    top: -5px;
+    margin-left: 20px;
+    background-image: url("../assets/loggo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 200px;
+    height: 60px;
+  }
+  .nav {
+    display: flex;
+    justify-content: center;
   }
 }
