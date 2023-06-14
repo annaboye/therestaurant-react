@@ -10,11 +10,10 @@ import CookieConsent from "react-cookie-consent";
 export const ContactForm = () => {
   const [userInput1, setUserInput1] = useState("");
   const [userInput2, setUserInput2] = useState("");
-
   const [showThanks, setShowThanks] = useState(false);
   const [showForm, setShowForm] = useState(true);
   const [loading, setLoading] = useState(false);
-   const [userInput3, setUserInput3] = useState("");
+  const [userInput3, setUserInput3] = useState("");
   const [showConsent, setShowConsent] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
@@ -111,6 +110,7 @@ export const ContactForm = () => {
                 type="text"
                 onChange={handleChangeName}
                 value={userInput1}
+                required
               />
             </div>
             <div className="form-group">
@@ -119,11 +119,12 @@ export const ContactForm = () => {
                 type="email"
                 onChange={handleChangeEmail}
                 value={userInput2}
+                required
               />
             </div>
             <div className="form-group">
               <label htmlFor="message">Message</label>
-              <textarea rows={5} cols={30} onChange={handleChangeMessage}></textarea>
+              <textarea rows={5} cols={30} onChange={handleChangeMessage} value={userInput3} required></textarea>
             </div>
 
             <button>Skicka</button>

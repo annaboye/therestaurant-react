@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import "./ContactForm.scss";
 import { getBookingsByDate } from "../services/getBookingsByDate";
 import { createBooking } from "../services/createBooking";
@@ -9,6 +9,7 @@ import { faCircleCheck, faSleigh } from "@fortawesome/free-solid-svg-icons";
 import { calculateTables } from "../functions/calculateTables";
 import { IBooking } from "../models/IBooking";
 import CookieConsent from "react-cookie-consent";
+import { Link } from "react-router-dom";
 
 const defaultForm = {
   date: "",
@@ -18,7 +19,7 @@ const defaultForm = {
   guest: { name: "", email: "", mobile: "" },
 };
 
-interface BookingState {
+interface IBookingState {
   currentpage: Number;
   error: boolean;
   avalibleTables: boolean;
@@ -31,7 +32,7 @@ interface IBookingFormProps {
 
 export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
   const [userInput, setUserInput] = useState(defaultForm);
-  const [bookingState, setBookingState] = useState<BookingState>({
+  const [bookingState, setBookingState] = useState<IBookingState>({
     currentpage: 1,
     error: false,
     avalibleTables: true,
@@ -296,6 +297,9 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
           <div>
             <FontAwesomeIcon className="check-icon" icon={faCircleCheck} />
           </div>
+          <Link to={"/"}>
+            <button>Tillbaka till Hem</button>
+          </Link>
         </div>
       )}
     </div>
