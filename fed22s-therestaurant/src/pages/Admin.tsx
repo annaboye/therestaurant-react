@@ -1,8 +1,6 @@
 import { getBookings } from "../services/getBookings";
-import { BookingView } from "../components/BookingView";
-import { createBooking } from "../services/createBooking";
 import { BookingList } from "../components/BookingList";
-import { useState, FormEvent, ChangeEvent, useReducer, useEffect } from "react";
+import { useState, useReducer, useEffect } from "react";
 import { BookingForm } from "../components/BookingForm";
 import { ActionType, BookingsReducer } from "../reducers/BookingsReducer";
 import {
@@ -13,14 +11,12 @@ import { ClipLoader } from "react-spinners";
 import "./Admin.scss";
 import { CancelBooking } from "../components/CancelBooking";
 
+
+
 export const Admin = () => {
   const [bookings, dispatch] = useReducer(BookingsReducer, []);
-  const [showForm, setShowForm] = useState(false);
-  const [showFirstChoice, setShowFirstChoice] = useState(true);
-  const [showSecondChoice, setShowSecondChoice] = useState(false);
-  const [showBookingList, setShowBookingList] = useState(false);
-
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     async function fetchBookings() {
@@ -43,40 +39,36 @@ export const Admin = () => {
 
     setTimeout(() => {
       setLoading(false);
-      setShowBookingList(true);
+      setCurrentPage(4);
     }, 1000);
   };
 
-  const handleShowForm = () => {
-    setShowForm(true);
-    /*  setShowSuccess(false); */
+  const handleShowBookingForm = () => {
+    setCurrentPage(3)
+
   };
 
-  const handleShowSecondChoice = () => {
-    setShowSecondChoice(true);
-    setShowFirstChoice(false);
-    setShowForm(false);
-    /*  setShowSuccess(false); */
+  const showHandleBookings = () => {
+    setCurrentPage(2)
+   
   };
 
   const handleShowBookingList = () => {
+    
+  setCurrentPage(0)
+    
     showSpinner();
-    setShowSecondChoice(false);
-    /* setShowBookingList(false); */
-  };
-
-  const handleChangeShowSuccess = () => {
-    return;
+   
   };
 
   const goBacktoSecondChoice = () => {
-    setShowSecondChoice(true);
-    setShowBookingList(false);
+    setCurrentPage(2)
+   
   };
 
   const goBackToFirstChoice = () => {
-    setShowFirstChoice(true);
-    setShowSecondChoice(false);
+  setCurrentPage(1)
+   
   };
 
   return (
@@ -84,12 +76,12 @@ export const Admin = () => {
       <BookingContext.Provider value={bookings}>
         <BookingDispatchContext.Provider value={dispatch}>
           <div className="alt-wrapper">
-            {showFirstChoice && (
+            {currentPage===1 && (
               <>
-                <button onClick={handleShowSecondChoice}>
+                <button onClick={showHandleBookings}>
                   Hantera bokningar
                 </button>
-                <button onClick={handleShowForm}>Ny bokning</button>
+                <button onClick={handleShowBookingForm}>Ny bokning</button>
               </>
             )}
 
@@ -105,7 +97,7 @@ export const Admin = () => {
               </div>
             )}
 
-            {showSecondChoice && (
+            {currentPage===2 && (
               <>
                 <button onClick={handleShowBookingList}>
                   Hämta alla bokningar
@@ -119,14 +111,18 @@ export const Admin = () => {
               </>
             )}
 
-            {showForm && (
+            {currentPage ===3  && (
+              <>
               <BookingForm
                 isAdmin={true}
-                changeShow={handleChangeShowSuccess}
+                changeShow={() => {
+                  return}}
               ></BookingForm>
+              <button onClick={goBackToFirstChoice}>Tillbaka</button>
+              </>
             )}
 
-            {showBookingList && (
+            {currentPage===4 && (
               <>
                 <button onClick={goBacktoSecondChoice}>Tillbaka</button>
                 <BookingList></BookingList>
