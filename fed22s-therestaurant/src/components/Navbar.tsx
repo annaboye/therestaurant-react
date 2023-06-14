@@ -32,32 +32,41 @@ export const Navbar = () => {
           <div className={burger_class}></div>
           <div className={burger_class}></div>
         </div>
+
+        <div className="loggo-mobile"></div>
+
+        <div className="adjuster"></div>
       </nav>
 
       <div className={menu_class}>
-        <div className="bar">
-          <ul>
-            <li>
-              <Link to={"/"} onClick={closeMenu}>
-                Hem
-              </Link>
-            </li>
-            <li>
-              <Link to={"/booking"} onClick={closeMenu}>
-                Bokning
-              </Link>
-            </li>
-            <li>
-              <Link to={"/contact"} onClick={closeMenu}>
-                Kontakt
-              </Link>
-            </li>
-            <li>
-              <Link to={"/admin"} onClick={closeMenu}>
-                Admin
-              </Link>
-            </li>
-          </ul>
+        <div className="bar-wrapper">
+          <Link to={"/"}>
+            <div className="loggo"></div>
+          </Link>
+          <div className="bar">
+            <ul>
+              <li>
+                <Link to={"/"} onClick={closeMenu}>
+                  Hem
+                </Link>
+              </li>
+              <li>
+                <Link to={"/booking"} onClick={closeMenu}>
+                  Bokning
+                </Link>
+              </li>
+              <li>
+                <Link to={"/contact"} onClick={closeMenu}>
+                  Kontakt
+                </Link>
+              </li>
+              <li>
+                <Link to={"/admin"} onClick={closeMenu}>
+                  Admin
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

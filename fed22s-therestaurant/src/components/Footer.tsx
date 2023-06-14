@@ -44,8 +44,8 @@ export const Footer = () => {
             <li>Tis: 11:00 - 22:00</li>
             <li>Ons: 11:00 - 22:00</li>
             <li>Tor: 11:00 - 22:00</li>
-            <li>Fre: 11:00 - 22:00</li>
-            <li>Lör: 11:00 - 22:00</li>
+            <li>Fre: 11:00 - 23:00</li>
+            <li>Lör: 11:00 - 23:00</li>
             <li>Sön: 11:00 - 22:00</li>
           </ul>
         </div>
