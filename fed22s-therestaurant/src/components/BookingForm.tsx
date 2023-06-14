@@ -297,9 +297,9 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
           <div>
             <FontAwesomeIcon className="check-icon" icon={faCircleCheck} />
           </div>
-          <Link to={"/"}>
+          {!isAdmin && <Link to={"/"}>
             <button>Tillbaka till Hem</button>
-          </Link>
+          </Link>}
         </div>
       )}
     </div>

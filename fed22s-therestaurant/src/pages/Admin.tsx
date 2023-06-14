@@ -16,22 +16,6 @@ export const Admin = () => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    async function fetchBookings() {
-      try {
-        const bookingData = await getBookings();
-        dispatch({
-          type: ActionType.GET_ALL,
-          payload: JSON.stringify(bookingData),
-        });
-      } catch (error) {
-        console.error("Error fetching bookings:", error);
-      }
-    }
-
-    fetchBookings();
-  }, []);
-
   const showSpinner = () => {
     setLoading(true);
 
@@ -50,6 +34,19 @@ export const Admin = () => {
   };
 
   const handleShowBookingList = () => {
+    async function fetchBookings() {
+      try {
+        const bookingData = await getBookings();
+        dispatch({
+          type: ActionType.GET_ALL,
+          payload: JSON.stringify(bookingData),
+        });
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      }
+    }
+
+    fetchBookings();
     setCurrentPage(0);
 
     showSpinner();
@@ -103,12 +100,14 @@ export const Admin = () => {
 
             {currentPage === 3 && (
               <>
+             
                 <BookingForm
                   isAdmin={true}
                   changeShow={() => {
                     return;
                   }}
                 ></BookingForm>
+                 <button onClick={goBackToFirstChoice}>Tillbaka</button>
               </>
             )}
 
