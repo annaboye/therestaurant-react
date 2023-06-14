@@ -20,31 +20,36 @@ export const Booking = () => {
 
   return (
     <>
-      <div>
-        {showForm && (
-          <div>
-            <h2>Bokning</h2>
-            <BookingForm isAdmin={false} changeShow={handleChangeShowCancel} />
-          </div>
-        )}
+      <div className="booking-wrapper">
+        <div className="user-area">
+          {showForm && (
+            <div>
+              <h2>Bokning</h2>
+              <BookingForm
+                isAdmin={false}
+                changeShow={handleChangeShowCancel}
+              />
+            </div>
+          )}
 
-        {showBack && (
-          <p>
-            <Link to={"/"}>Tillbaka</Link>
-          </p>
-        )}
-      </div>
+          {showBack && (
+            <p>
+              <Link to={"/"}>Tillbaka</Link>
+            </p>
+          )}
 
-      {showCancel && (
-        <div className="cancel-wrapper">
-          <h3>Hantera din bokning</h3>
-          <p>
-            Skriv in ditt bokningsnummer här för avboka eller kolla tid och
-            datum:
-          </p>
-          <CancelBooking changeShowBooking={handleChangeShowBooking} />
+          {showCancel && (
+            <div className="cancel-wrapper">
+              <h3>Hantera din bokning</h3>
+              <p>
+                Skriv in ditt bokningsnummer här för avboka eller kolla tid och
+                datum:
+              </p>
+              <CancelBooking changeShowBooking={handleChangeShowBooking} />
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </>
   );
 };

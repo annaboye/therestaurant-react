@@ -1,3 +1,28 @@
+
+.booking-wrapper {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background-image: url(https://images.pexels.com/photos/13485217/pexels-photo-13485217.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  
+  .user-area {
+
+  background-color: rgba($color: #faf6f6, $alpha: 0.33);
+  width: 40%;
+  padding: 2em;
+  
+
+  }
+}
+
 .cancel-wrapper {
   padding: 2rem;
 }
