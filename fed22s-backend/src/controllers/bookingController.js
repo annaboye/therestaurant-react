@@ -27,8 +27,9 @@ exports.getAllBookings = async (req, res, next) => {
 };
 
 exports.createBooking = async (req, res, next) => {
-  const date = req.body.date;
+ 
   try {
+    const date = req.body.date;
     const time = req.body.time;
     const amountOfPersons = req.body.amountOfPersons;
     const description = req.body.description || " ";
@@ -65,7 +66,7 @@ exports.createBooking = async (req, res, next) => {
       text: "Här kommer ditt bokningsnummer: ", // plain text body
       html: mailText,
     };
-    console.log(guest.email);
+
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.log(error);
