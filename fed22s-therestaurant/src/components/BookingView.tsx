@@ -1,5 +1,5 @@
 import { IBooking } from "../models/IBooking";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import { deleteBooking } from "../services/deleteBooking";
 import { BookingDispatchContext } from "../contexts/BookingContext";
