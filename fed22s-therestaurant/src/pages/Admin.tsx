@@ -11,12 +11,10 @@ import { ClipLoader } from "react-spinners";
 import "./Admin.scss";
 import { CancelBooking } from "../components/CancelBooking";
 
-
-
 export const Admin = () => {
   const [bookings, dispatch] = useReducer(BookingsReducer, []);
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     async function fetchBookings() {
@@ -44,31 +42,25 @@ export const Admin = () => {
   };
 
   const handleShowBookingForm = () => {
-    setCurrentPage(3)
-
+    setCurrentPage(3);
   };
 
   const showHandleBookings = () => {
-    setCurrentPage(2)
-   
+    setCurrentPage(2);
   };
 
   const handleShowBookingList = () => {
-    
-  setCurrentPage(0)
-    
+    setCurrentPage(0);
+
     showSpinner();
-   
   };
 
   const goBacktoSecondChoice = () => {
-    setCurrentPage(2)
-   
+    setCurrentPage(2);
   };
 
   const goBackToFirstChoice = () => {
-  setCurrentPage(1)
-   
+    setCurrentPage(1);
   };
 
   return (
@@ -76,11 +68,9 @@ export const Admin = () => {
       <BookingContext.Provider value={bookings}>
         <BookingDispatchContext.Provider value={dispatch}>
           <div className="alt-wrapper">
-            {currentPage===1 && (
+            {currentPage === 1 && (
               <>
-                <button onClick={showHandleBookings}>
-                  Hantera bokningar
-                </button>
+                <button onClick={showHandleBookings}>Hantera bokningar</button>
                 <button onClick={handleShowBookingForm}>Ny bokning</button>
               </>
             )}
@@ -97,7 +87,7 @@ export const Admin = () => {
               </div>
             )}
 
-            {currentPage===2 && (
+            {currentPage === 2 && (
               <>
                 <button onClick={handleShowBookingList}>
                   Hämta alla bokningar
@@ -111,18 +101,18 @@ export const Admin = () => {
               </>
             )}
 
-            {currentPage ===3  && (
+            {currentPage === 3 && (
               <>
-              <BookingForm
-                isAdmin={true}
-                changeShow={() => {
-                  return}}
-              ></BookingForm>
-              <button onClick={goBackToFirstChoice}>Tillbaka</button>
+                <BookingForm
+                  isAdmin={true}
+                  changeShow={() => {
+                    return;
+                  }}
+                ></BookingForm>
               </>
             )}
 
-            {currentPage===4 && (
+            {currentPage === 4 && (
               <>
                 <button onClick={goBacktoSecondChoice}>Tillbaka</button>
                 <BookingList></BookingList>
