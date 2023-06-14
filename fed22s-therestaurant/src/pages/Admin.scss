@@ -1,26 +1,29 @@
 .alt-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-align-items: center;
-margin-top: 1em;
+  min-height: 500px;
+  /*  background: linear-gradient(white, rgb(172, 172, 222), white); */
 
-
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+}
 button {
-   
-
-    margin-top: 2em;
+  margin-top: 2em;
 }
-   
-  
-}
-
 
 .list-wrapper {
-    margin-top: 2em;
- 
-    li {
-    margin-top: 2em;}
+  margin-top: 2em;
 
+  li {
+    margin-top: 2em;
+  }
+}
+
+.page1 {
+  display: flex;
+  flex-direction: column;
 }

@@ -1,5 +1,4 @@
 .contact-wrapper {
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,16 +9,12 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  
-  
+
   .user-area {
-
-
-
-  background-color: rgba($color: #faf6f6, $alpha: 0.43);
-  width: 40%;
- 
-  
-
+    background-color: rgba($color: #faf6f6, $alpha: 0.43);
+    width: 90%;
+    @media (min-width: 768px) {
+      width: 40%;
+    }
   }
 }

@@ -61,7 +61,7 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
                 value={userInput}
                 required
               />
-              <button>Hantera bokning</button>
+              <button className="booking-button">Hantera bokning</button>
             </form>
           </div>
         )}

@@ -1,9 +1,7 @@
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { BookingView } from "./BookingView";
-import {
-  BookingContext,
-} from "../contexts/BookingContext";
-import "./BookingList.scss"
+import { BookingContext } from "../contexts/BookingContext";
+import "./BookingList.scss";
 
 export const BookingList = () => {
   const bookings = useContext(BookingContext);
@@ -15,7 +13,6 @@ export const BookingList = () => {
     const name = e.target.name;
     setUserInput({ ...userInput, [name]: e.target.value });
   };
-  
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -27,15 +24,17 @@ export const BookingList = () => {
     );
   };
 
-  const handleSubmitName = (e:FormEvent) =>{
+  const handleSubmitName = (e: FormEvent) => {
     e.preventDefault();
     setBookingsToView(
-      bookings.filter(
-        (booking) =>
-          booking.guest.name.trim().toLowerCase().includes(userInput.name.trim().toLowerCase()) 
+      bookings.filter((booking) =>
+        booking.guest.name
+          .trim()
+          .toLowerCase()
+          .includes(userInput.name.trim().toLowerCase())
       )
     );
-  }
+  };
 
   return (
     <>
@@ -51,35 +50,40 @@ export const BookingList = () => {
               name="date"
               required
             />
-            <label>
-            <input
-              type="radio"
-              name="time"
-              value={"18:00"}
-              onChange={handleChangeOne}
-              required
-              aria-label="18:00"
-            />
-            18:00
-            </label>
-            <label>
-             <input
-              type="radio"
-              name="time"
-              value={"21:00"}
-              onChange={handleChangeOne}
-              required
-            />
-            21:00
-            </label>
-            
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="time"
+                  value={"18:00"}
+                  onChange={handleChangeOne}
+                  required
+                  aria-label="18:00"
+                />
+                18:00
+                <input
+                  type="radio"
+                  name="time"
+                  value={"21:00"}
+                  onChange={handleChangeOne}
+                  required
+                />
+                21:00
+              </label>
+            </div>
+
             <button className="name-button">Sök</button>
           </form>
         </div>
         <div className="form-group">
-         <h3>Filtrerar på namn:</h3>
+          <h3>Filtrerar på namn:</h3>
           <form onSubmit={handleSubmitName}>
-            <input type="text" name="name" required onChange={handleChangeOne}/>
+            <input
+              type="text"
+              name="name"
+              required
+              onChange={handleChangeOne}
+            />
             <button>Sök</button>
           </form>
         </div>
@@ -94,7 +98,9 @@ export const BookingList = () => {
               </li>
             ))}
           </ul>
-          {bookingsToView.length ===0 && <div> Tyvärr hittades inga bokningar gör en ny sökning</div>}
+          {bookingsToView.length === 0 && (
+            <div> Tyvärr hittades inga bokningar gör en ny sökning</div>
+          )}
         </div>
       </div>
     </>

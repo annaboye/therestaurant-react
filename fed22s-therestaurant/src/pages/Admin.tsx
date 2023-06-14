@@ -67,8 +67,12 @@ export const Admin = () => {
           <div className="alt-wrapper">
             {currentPage === 1 && (
               <>
-                <button onClick={showHandleBookings}>Hantera bokningar</button>
-                <button onClick={handleShowBookingForm}>Ny bokning</button>
+                <div className="page1">
+                  <button onClick={showHandleBookings}>
+                    Hantera bokningar
+                  </button>
+                  <button onClick={handleShowBookingForm}>Ny bokning</button>
+                </div>
               </>
             )}
 
@@ -89,25 +93,27 @@ export const Admin = () => {
                 <button onClick={handleShowBookingList}>
                   Hämta alla bokningar
                 </button>
-                <CancelBooking
-                  changeShowBooking={() => {
-                    return;
-                  }}
-                ></CancelBooking>
+                <div>
+                  <h2>Hantera bokning:</h2>
+                  <CancelBooking
+                    changeShowBooking={() => {
+                      return;
+                    }}
+                  ></CancelBooking>
+                </div>
                 <button onClick={goBackToFirstChoice}>Tillbaka</button>
               </>
             )}
 
             {currentPage === 3 && (
               <>
-             
                 <BookingForm
                   isAdmin={true}
                   changeShow={() => {
                     return;
                   }}
                 ></BookingForm>
-                 <button onClick={goBackToFirstChoice}>Tillbaka</button>
+                <button onClick={goBackToFirstChoice}>Tillbaka</button>
               </>
             )}
 

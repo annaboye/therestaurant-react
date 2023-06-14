@@ -8,3 +8,22 @@
 .name-button {
   margin-left: 1rem;
 }
+
+.list-wrapper {
+  li {
+    border-radius: 10px;
+    padding: 0.5rem;
+    background-color: #eaeef5;
+    border-top: 8px solid rgb(37, 39, 53);
+    border-bottom: 2px solid rgb(37, 39, 53);
+    padding: 1rem;
+  }
+  ul {
+    @media (min-width: 768px) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+  }
+}
