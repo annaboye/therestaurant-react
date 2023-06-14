@@ -1,24 +1,5 @@
 import axios from "axios";
-
-interface IGuest {
-  name: string;
-
-  email: string;
-
-  mobile: string;
-}
-
-interface IBooking {
-  _id?: string;
-
-  date: string;
-
-  time: string;
-
-  amountOfPersons: number;
-
-  guest: IGuest;
-}
+import { IBooking } from "../models/IBooking";
 
 export const createBooking = async (booking: IBooking) => {
   try {

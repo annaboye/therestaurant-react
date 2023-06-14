@@ -1,17 +1,5 @@
 import axios from "../../node_modules/axios/index";
-
-interface IGuest {
-  name: string;
-  email: string;
-  mobile: string;
-}
-
-interface IBooking {
-  date: string;
-  time: string;
-  amountOfPersons: number;
-  guest: IGuest;
-}
+import { IBooking } from "../models/IBooking";
 
 const get = async <T>(url: string) => {
   return await axios.get<T>(url);
