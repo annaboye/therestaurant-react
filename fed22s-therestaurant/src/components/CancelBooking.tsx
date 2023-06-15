@@ -41,7 +41,7 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
       if (fetchedBooking) {
         setBooking(fetchedBooking);
         setShowBooking(true);
-        setShowError(false)
+        setShowError(false);
       }
     } catch (error) {
       console.error(error);
@@ -54,7 +54,7 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
       <div>
         {showInput && (
           <div className="form-group">
-            <form onSubmit={(e) => handleSubmit(e, userInput)}>
+            <form onSubmit={(e) => handleSubmit(e, userInput.trim())}>
               <input
                 placeholder="bokningsnummer.."
                 type="text"
