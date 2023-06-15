@@ -41,6 +41,7 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
       if (fetchedBooking) {
         setBooking(fetchedBooking);
         setShowBooking(true);
+        setShowError(false)
       }
     } catch (error) {
       console.error(error);

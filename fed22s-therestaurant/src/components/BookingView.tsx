@@ -13,18 +13,30 @@ interface IBookingProps {
 export const BookingView = ({ booking }: IBookingProps) => {
   const dispatch = useContext(BookingDispatchContext);
   const [deleted, setDeleted] = useState(false);
-  const deleteThisBooking = (bookingId: string) => {
-    deleteBooking(bookingId);
-    dispatch({ type: ActionType.REMOVE, payload: bookingId as string });
-    setDeleted(true);
-  };
+  const [notDeleted, setNotDeleted] = useState(false)
+  const deleteThisBooking = async (bookingId: string) => {
+    try{
+    const deletedBooking = await deleteBooking(bookingId);
+    if(deletedBooking){dispatch({ type: ActionType.REMOVE, payload: bookingId as string });
+    setDeleted(true)
+  setNotDeleted(false)}
+    else{
+    setNotDeleted(true)
+    }}catch(error){
+ console.log(error)
+ setNotDeleted(true)
+    }
+  
+  }
 
   if (deleted) {
     return <div>Bokning raderades!</div>;
   }
+ 
   if (booking) {
     return (
       <div>
+        
         <h3>ID: {booking._id}</h3>
         <p>Datum: {new Date(booking.date).toLocaleDateString("sv-SE")}</p>
         <p>Tid: {booking.time}</p>
@@ -41,6 +53,7 @@ export const BookingView = ({ booking }: IBookingProps) => {
         >
           Ta bort bokning
         </button>
+        {notDeleted&& <div>tyvärr gick det inte att avboka just nu</div>}
       </div>
     );
   } else {

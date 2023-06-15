@@ -8,14 +8,17 @@ export const Booking = () => {
   const [showForm, setShowForm] = useState(true);
   const [showBack, setShowBack] = useState(false);
   const [showCancel, setShowCancel] = useState(true);
+  const [showtext, setShowText] = useState(true)
 
   const handleChangeShowBooking = () => {
     setShowForm(false);
     setShowBack(true);
+    setShowText(false)
   };
 
   const handleChangeShowCancel = () => {
     setShowCancel(false);
+    setShowText(false)
   };
 
   return (
@@ -38,13 +41,16 @@ export const Booking = () => {
             </p>
           )}
 
-          {showCancel && (
-            <div className="cancel-wrapper">
-              <h3>Hantera din bokning</h3>
-              <p>
+           {showtext && <><h3>Hantera din bokning</h3>
+               <p>
                 Skriv in ditt bokningsnummer här för avboka eller kolla tid och
                 datum:
               </p>
+              </>}
+
+          {showCancel && (
+            <div className="cancel-wrapper">
+              
               <CancelBooking changeShowBooking={handleChangeShowBooking} />
             </div>
           )}
