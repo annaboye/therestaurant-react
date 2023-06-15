@@ -5,11 +5,10 @@ export const deleteBooking = async (bookingId: string | undefined) => {
     const response = await axios.delete(
       `http://localhost:4000/api/v1/bookings/${bookingId}`
     );
-    console.log(response.status);
+
     if (response.status === 204) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   } catch (error) {

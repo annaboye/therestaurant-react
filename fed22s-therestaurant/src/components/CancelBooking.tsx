@@ -36,7 +36,6 @@ export const CancelBooking = ({ changeShowBooking }: IBookingViewProps) => {
 
       setShowInput(false);
       changeShowBooking();
-      console.log(fetchedBooking);
 
       if (fetchedBooking) {
         setBooking(fetchedBooking);

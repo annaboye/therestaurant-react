@@ -77,14 +77,19 @@ To get a local copy up and running follow these simple example steps.
 ### Installation
 
 1. Clone the repo
+
    ```sh
    git clone https://github.com/Medieinstitutet/the-restaurant-grupp7.git
    ```
+
 2. Install NPM packages for the backend and for the frontend
+
    ```sh
    npm install
    ```
+
 3. Create .env file in the root directory and add the credentials
+
    ```sh
    PORT=4000
    MONGO_CONNECTION_STRING= 'yourMongoDbKey'
