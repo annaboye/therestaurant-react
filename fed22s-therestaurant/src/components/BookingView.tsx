@@ -5,6 +5,7 @@ import { deleteBooking } from "../services/deleteBooking";
 import { BookingDispatchContext } from "../contexts/BookingContext";
 import { ActionType } from "../reducers/BookingsReducer";
 import "./Bookingview.scss";
+import { Spinner } from "./Spinner";
 
 interface IBookingProps {
   booking: IBooking;
@@ -14,13 +15,20 @@ export const BookingView = ({ booking }: IBookingProps) => {
   const dispatch = useContext(BookingDispatchContext);
   const [deleted, setDeleted] = useState(false);
   const [notDeleted, setNotDeleted] = useState(false)
+  const [showSpinner, setShowSpinner] =useState(false)
+
   const deleteThisBooking = async (bookingId: string) => {
+    setShowSpinner(true)
     try{
     const deletedBooking = await deleteBooking(bookingId);
+  
     if(deletedBooking){dispatch({ type: ActionType.REMOVE, payload: bookingId as string });
+    setNotDeleted(false)
+    
     setDeleted(true)
-  setNotDeleted(false)}
+    setShowSpinner(false)}
     else{
+     
     setNotDeleted(true)
     }}catch(error){
  console.log(error)
@@ -53,7 +61,8 @@ export const BookingView = ({ booking }: IBookingProps) => {
         >
           Ta bort bokning
         </button>
-        {notDeleted&& <div>tyvärr gick det inte att avboka just nu</div>}
+        {showSpinner && <Spinner></Spinner>}
+        {notDeleted && <div>tyvärr gick det inte att göra en avbokning just nu</div>}
       </div>
     );
   } else {

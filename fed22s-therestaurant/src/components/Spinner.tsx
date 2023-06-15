@@ -21,7 +21,7 @@ export const Spinner = () => {
           data-testid="loader"
         />
       ) : (
-        <h3>hej</h3>
+        <div></div>
       )}
     </>
   );
