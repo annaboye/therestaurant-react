@@ -27,7 +27,6 @@ exports.getAllBookings = async (req, res, next) => {
 };
 
 exports.createBooking = async (req, res, next) => {
- 
   try {
     const date = req.body.date;
     const time = req.body.time;
@@ -93,6 +92,33 @@ exports.deleteBooking = async (req, res, next) => {
     if (!bookingToDelete) throw new NotFoundError("Denna bokning finns inte!");
 
     await bookingToDelete.delete();
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.MAIL,
+        pass: process.env.PASSWORD,
+      },
+    });
+
+    const mailText = `
+  Du har avbokat ett bord hos oss, välkommen att göra en ny bokning!
+     `;
+
+    let mailOptions = {
+      from: "The restaurant",
+      to: bookingToDelete.guest.email,
+      subject: "Avbokningsbekräftelse",
+      text: "", // plain text body
+      html: mailText,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
 
     return res.sendStatus(204);
   } catch (error) {
