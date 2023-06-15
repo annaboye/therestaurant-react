@@ -291,14 +291,16 @@ export const BookingForm = ({ changeShow, isAdmin }: IBookingFormProps) => {
         <div className="booking-id-wrapper">
           <h3>Tack för din bokning!</h3>
           <h4> Här är ditt bokningsnummer:</h4>
-          <p>{bookingId}</p>
+          <p className="id-size">{bookingId}</p>
 
           <div>
             <FontAwesomeIcon className="check-icon" icon={faCircleCheck} />
           </div>
-          {!isAdmin && <Link to={"/"}>
-            <button>Tillbaka till Hem</button>
-          </Link>}
+          {!isAdmin && (
+            <Link to={"/"}>
+              <button>Tillbaka till Hem</button>
+            </Link>
+          )}
         </div>
       )}
     </div>
