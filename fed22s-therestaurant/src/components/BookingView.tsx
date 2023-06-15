@@ -53,6 +53,8 @@ export const BookingView = ({ booking }: IBookingProps) => {
         <p>Mail: {booking.guest.email}</p>
         <p>Telefonnummer: {booking.guest.mobile}</p>
         <p>Meddelande: {booking.description}</p>
+
+        <div className="spinner-button-wrapper">
         <button
           className="delete-button"
           onClick={() => {
@@ -62,6 +64,7 @@ export const BookingView = ({ booking }: IBookingProps) => {
           Ta bort bokning
         </button>
         {showSpinner && <Spinner></Spinner>}
+        </div>
         {notDeleted && <div>tyvärr gick det inte att göra en avbokning just nu</div>}
       </div>
     );

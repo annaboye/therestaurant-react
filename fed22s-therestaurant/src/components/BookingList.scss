@@ -1,4 +1,11 @@
 .form-group {
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  
   input {
     margin: 0.5rem;
     font-size: 20px;

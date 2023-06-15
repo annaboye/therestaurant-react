@@ -14,3 +14,9 @@ button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
+.spinner-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
