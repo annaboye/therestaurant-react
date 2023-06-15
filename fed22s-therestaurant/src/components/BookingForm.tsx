@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import "./ContactForm.scss";
 import { getBookingsByDate } from "../services/getBookingsByDate";
 import { createBooking } from "../services/createBooking";
 import { ClipLoader } from "react-spinners";
