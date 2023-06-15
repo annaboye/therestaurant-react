@@ -87,7 +87,9 @@ To get a local copy up and running follow these simple example steps.
 3. Create .env file in the root directory and add the credentials
    ```sh
    PORT=4000
-   MONGO_CONNECTION_STRING=
+   MONGO_CONNECTION_STRING= 'yourMongoDbKey'
+   MAIL = 'xxxx@gmail.com'
+   PASSWORD = 'yourgmailpassword'
    ```
 
 ### Design

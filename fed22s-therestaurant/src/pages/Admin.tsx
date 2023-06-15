@@ -48,7 +48,6 @@ export const Admin = () => {
 
     fetchBookings();
     setCurrentPage(0);
-
     showSpinner();
   };
 
