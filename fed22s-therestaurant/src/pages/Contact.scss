@@ -3,16 +3,20 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background-image: url(https://images.pexels.com/photos/1484529/pexels-photo-1484529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
   .user-area {
     background-color: rgba($color: #faf6f6, $alpha: 0.43);
     width: 90%;
+
     @media (min-width: 768px) {
       width: 40%;
     }

@@ -14,7 +14,7 @@ nav {
   padding: 1em;
 }
 .loggo-mobile {
-  background-image: url("../assets//loggo2.jpg");
+  background-image: url("../assets//loggo.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -112,14 +112,14 @@ li {
 
   animation: rotateBar ease-in-out 0.5s;
 }
-/* @keyframes rotateBar {
+@keyframes rotateBar {
   0% {
     transform: rotate(-45deg);
   }
   100% {
     transform: rotate(0deg);
   }
-} */
+}
 ul {
   list-style-type: none;
   padding-inline-start: 0;
@@ -133,20 +133,16 @@ a {
   font-size: 20px;
   font-weight: 600;
 }
-.burger-wrapper {
-}
 
 @media (min-width: 768px) {
   a {
     font-size: 24px;
     font-weight: 700;
-    /* Add additional styles as per your requirement */
   }
   .burger-menu {
     display: none;
   }
 
-  /* Display the menu directly in the header */
   .menu {
     display: flex;
     align-items: center;
