@@ -6,23 +6,25 @@ import { ClipLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import CookieConsent from "react-cookie-consent";
 
+const defaultForm={
+  name: "",
+  mail: "",
+  message: "",
+
+} 
 
 export const ContactForm = () => {
-  const [userInput1, setUserInput1] = useState("");
-  const [userInput2, setUserInput2] = useState("");
   const [showThanks, setShowThanks] = useState(false);
   const [showForm, setShowForm] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [userInput3, setUserInput3] = useState("");
+
+  const [userInput, setUserInput] = useState(defaultForm)
+  
   const [showConsent, setShowConsent] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setUserInput1("");
-    setUserInput2("");
-    setShowForm(false);
-    
-     setShowConsent(true);
+    setShowConsent(true);
   };
   const showSpinner = () => {
     setLoading(true);
@@ -32,21 +34,16 @@ export const ContactForm = () => {
       setShowThanks(true);
     }, 1000);}
 
-  const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserInput1(e.target.value);
-  };
-  const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserInput2(e.target.value);
-  };
 
-  const handleChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setUserInput3(e.target.value);
-  };
+    const handleChange = (e: ChangeEvent<HTMLInputElement>|ChangeEvent<HTMLTextAreaElement> ) => {
+      const name = e.target.name;
+      setUserInput({ ...userInput, [name]: e.target.value });
+    };
+
 
   const handleAccept = () => {
-    setUserInput1("");
-    setUserInput2("");
-    setUserInput3("");
+    setShowForm(false);
+    setUserInput(defaultForm)
     showSpinner();
   };
 
@@ -108,23 +105,27 @@ export const ContactForm = () => {
               <label htmlFor="name">Name</label>
               <input
                 type="text"
-                onChange={handleChangeName}
-                value={userInput1}
+                name="name"
+                onChange={handleChange}
+                value={userInput.name}
                 required
               />
             </div>
+            
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <input
+              name="mail"
                 type="email"
-                onChange={handleChangeEmail}
-                value={userInput2}
+                onChange={handleChange}
+                value={userInput.mail}
                 required
               />
             </div>
             <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea rows={5} cols={30} onChange={handleChangeMessage} value={userInput3} required></textarea>
+              <label htmlFor="message"
+              >Message</label>
+              <textarea name="message" rows={5} cols={30} onChange={handleChange} value={userInput.message} required></textarea>
             </div>
 
             <button>Skicka</button>

@@ -14,7 +14,7 @@ interface IBookingProps {
 export const BookingView = ({ booking }: IBookingProps) => {
   const dispatch = useContext(BookingDispatchContext);
   const [deleted, setDeleted] = useState(false);
-  const [notDeleted, setNotDeleted] = useState(false)
+  const [couldNotDelete, setCouldNotDelete] = useState(false)
   const [showSpinner, setShowSpinner] =useState(false)
 
   const deleteThisBooking = async (bookingId: string) => {
@@ -23,16 +23,14 @@ export const BookingView = ({ booking }: IBookingProps) => {
     const deletedBooking = await deleteBooking(bookingId);
   
     if(deletedBooking){dispatch({ type: ActionType.REMOVE, payload: bookingId as string });
-    setNotDeleted(false)
-    
+    setCouldNotDelete(false)
     setDeleted(true)
     setShowSpinner(false)}
     else{
-     
-    setNotDeleted(true)
+    setCouldNotDelete(true)
     }}catch(error){
  console.log(error)
- setNotDeleted(true)
+ setCouldNotDelete(true)
     }
   
   }
@@ -65,7 +63,7 @@ export const BookingView = ({ booking }: IBookingProps) => {
         </button>
         {showSpinner && <Spinner></Spinner>}
         </div>
-        {notDeleted && <div>tyvärr gick det inte att göra en avbokning just nu</div>}
+        {couldNotDelete && <div>tyvärr gick det inte att göra en avbokning just nu</div>}
       </div>
     );
   } else {
