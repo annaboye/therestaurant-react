@@ -37,7 +37,7 @@
 
 ## About The Project
 
-Final project for the Javascript fördjupning course is a group assignment to build a restaurant website where we should be able to take table bookings.....
+Final project for the Javascript extended course is a group assignment to build a restaurant website where we should be able to take table bookings.....
 
 ### Built With
 
